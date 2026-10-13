@@ -83,22 +83,10 @@ release_month,compared_with,event,breakdown
 2025-07,2025-06,added,Sub ICB of GP Practice or Residence; Autism Status
 2025-07,2025-06,added,Sub ICB of GP Practice or Residence; Ethnicity
 2025-07,2025-06,added,Sub ICB of GP Practice or Residence; LD Status
-2025-08,2025-07,removed,Commissioning Region; Detention Type
-2025-08,2025-07,removed,Commissioning Region; IMD - Standardised Rate Difference from Most Deprived Quintile
-2025-08,2025-07,removed,Commissioning Region; Legal Status
-2025-08,2025-07,removed,Commissioning Region; Mean Deviation of Upper Ethnicity
-2025-08,2025-07,removed,England; Detention Type
-2025-08,2025-07,removed,England; IMD - Standardised Rate Difference from Most Deprived Quintile
-2025-08,2025-07,removed,England; Legal Status
-2025-08,2025-07,removed,England; Mean Deviation of Upper Ethnicity
-2025-08,2025-07,removed,ICB of GP Practice or Residence; IMD - Standardised Rate Difference from Most Deprived Quintile
-2025-08,2025-07,removed,ICB of GP Practice or Residence; Mean Deviation of Upper Ethnicity
-2025-09,2025-08,added,Commissioning Region; IMD - Standardised Rate Difference from Most Deprived Quintile
-2025-09,2025-08,added,Commissioning Region; Mean Deviation of Upper Ethnicity
-2025-09,2025-08,added,England; IMD - Standardised Rate Difference from Most Deprived Quintile
-2025-09,2025-08,added,England; Mean Deviation of Upper Ethnicity
-2025-09,2025-08,added,ICB of GP Practice or Residence; IMD - Standardised Rate Difference from Most Deprived Quintile
-2025-09,2025-08,added,ICB of GP Practice or Residence; Mean Deviation of Upper Ethnicity
+2025-09,2025-08,removed,Commissioning Region; Detention Type
+2025-09,2025-08,removed,Commissioning Region; Legal Status
+2025-09,2025-08,removed,England; Detention Type
+2025-09,2025-08,removed,England; Legal Status
 2025-10,2025-09,added,Commissioning Region; Detention Type
 2025-10,2025-09,added,Commissioning Region; Legal Status
 2025-10,2025-09,added,England; Detention Type

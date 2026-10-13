@@ -59,7 +59,7 @@ Each month is first published as **Performance** data. For some years NHS Englan
 
 Final files are not just corrected numbers. Because they are produced later, they also carry the later measure list, the later measure names and even the later area names. The July 2025 final file, for example, already uses "people with an open referral" and contains measures that were first published in December 2025. It also contains two names for 24 Sub ICB codes, the pre merger ICB name and the post merger one.
 
-Mixing versions creates false changes. Comparing a final file for one month with a performance file for the next produces measures that seem to vanish and reappear, and values that jump. The status column is also unreliable as a guide, with values of Final, Performance, `Performance ` with a trailing space, and Adhoc. Adhoc marks revised access measures in some 2024, 2025 and 2026 releases.
+Mixing versions creates false changes. An early run of this analysis used the Performance file for August 2025 between Final files for July and September. Twenty one measures appeared to vanish in August and come back in September, 14 headline measures flipped between their old and new names, and MHS148 fell by 39 percent and then nearly doubled. All of it disappeared once the August Final file was used. The status column is also unreliable as a guide, with values of Final, Performance, `Performance ` with a trailing space, and Adhoc. Adhoc marks revised access measures in some 2024, 2025 and 2026 releases.
 
 ### 4. Geography
 
@@ -97,7 +97,7 @@ Sharp month on month jumps in England values were flagged automatically and labe
 
 - **MHS30f, attended community mental health contacts** fell by about two thirds in April 2024, when version 6 arrived, and roughly tripled in May 2025, when NHS England changed its method.
 - **Crisis care referral measures** jumped in April 2023 when urgent and emergency care measures were redefined.
-- **Version switches** between Performance and End of Year Final files cause artificial jumps, for example in MHS148 and the very urgent crisis measures CCR118 and CCR119 during July to September 2025.
+- **Version boundaries** cause artificial jumps. Between June 2025, a Performance file, and July 2025, an End of Year Final file, MHS148 rises by 83 percent and the very urgent crisis measures CCR118 and CCR119 fall by up to a half. These jumps sit exactly on the switch between versions, so they say more about the files than about services.
 
 ### 8. Data quality notices from NHS England
 
@@ -130,7 +130,7 @@ make changelog   # compare releases and write the reference tables and detail re
 
 The profiler reads each file with DuckDB and writes summary tables. The change log compares each release with the one before. Both are tested in CI.
 
-**Limits of this analysis.** It covers the main data file only, not the separate out of area placements, referral spells or restrictive interventions files. It compares the versions held at the time, which are End of Year Final for 2023-24 and 2025-26 and Performance for 2022-23, 2024-25 and 2026-27. In Phase 1 the automated pipeline will collect every version of every file and this page will be regenerated.
+**Limits of this analysis.** It covers the main data file only, not the separate out of area placements, referral spells or restrictive interventions files. It compares the versions held at the time, which are End of Year Final for 2023-24 and 2025-26, Performance for 2024-25 and 2026-27, and files labelled Final in the status column for 2022-23. In Phase 1 the automated pipeline will collect every version of every file and this page will be regenerated.
 
 ## Sources
 

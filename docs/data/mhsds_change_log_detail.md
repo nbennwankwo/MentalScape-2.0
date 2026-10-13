@@ -45,8 +45,8 @@ It covers 50 releases from 2022-07 to 2026-08.
 | 2025-05 | 'Performance' | 393,124 | 329 | 64 | 79.0% | 0 | 0 | 0 | 42 | 106 | 1 measure IDs with two names |
 | 2025-06 | 'Performance' / 'Performance ' | 392,407 | 329 | 64 | 78.7% | 0 | 0 | 0 | 42 | 106 | 1 measure IDs with two names |
 | 2025-07 | 'Final' | 799,527 | 384 | 109 | 79.9% | 55 | 0 | 14 | 42 | 106 | mixed line endings, 24 codes with two names, 1 measure IDs with two names |
-| 2025-08 | 'Performance' / 'Performance ' | 712,283 | 363 | 99 | 79.5% | 0 | 21 | 14 | 42 | 106 | 1 measure IDs with two names |
-| 2025-09 | 'Final' | 795,610 | 384 | 105 | 80.0% | 21 | 0 | 14 | 42 | 106 | 24 codes with two names, 1 measure IDs with two names |
+| 2025-08 | 'Final' | 791,851 | 384 | 109 | 80.1% | 0 | 0 | 0 | 42 | 106 | mixed line endings, 24 codes with two names, 1 measure IDs with two names |
+| 2025-09 | 'Final' | 795,610 | 384 | 105 | 80.0% | 0 | 0 | 0 | 42 | 106 | 24 codes with two names, 1 measure IDs with two names |
 | 2025-10 | 'Final' | 797,348 | 384 | 109 | 79.9% | 0 | 0 | 0 | 42 | 106 | mixed line endings, 24 codes with two names, 1 measure IDs with two names |
 | 2025-11 | 'Final' | 799,047 | 384 | 109 | 80.1% | 0 | 0 | 0 | 42 | 106 | mixed line endings, 24 codes with two names, 1 measure IDs with two names |
 | 2025-12 | 'Final' | 800,567 | 384 | 109 | 80.0% | 0 | 0 | 0 | 42 | 106 | mixed line endings, 24 codes with two names, 1 measure IDs with two names |
@@ -272,16 +272,6 @@ Provider list churn this release 5 added, 3 removed, 0 renamed.
 - `MHS92` moved from 1,389 to 4,920 (x3.54) Closed referrals for children and young people aged between 0 and 17 with 2 contacts where the length of referral was over 14 days and a paired score
 - `MHS93` moved from 8,046 to 20,168 (x2.51) Closed referrals for children and young people aged between 0 and 17 with 2 contacts where the length of referral was over 14 days
 
-### 2023-08
-
-Compared with 2023-07.
-
-Provider list churn this release 8 added, 1 removed, 0 renamed.
-
-**One off jumps in England values (1)**
-
-- `CCR120b` moved from 643 to 422 (x0.66) New Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact within 24 hours of referral, Aged under 18
-
 ### 2023-09
 
 Compared with 2023-08.
@@ -359,6 +349,16 @@ Provider list churn this release 5 added, 1 removed, 1 renamed.
 
 - `MHS68` moved from 1,861 to 1,184 (x0.64) All referrals, aged 0 to 18, with any one or more SNOMED Codes and valid PERS score from MH Assessment Scale Current View in RP
 
+### 2024-08
+
+Compared with 2024-07.
+
+Provider list churn this release 7 added, 0 removed, 0 renamed.
+
+**One off jumps in England values (1)**
+
+- `MHS32b` moved from 7,556 to 4,889 (x0.65) Referrals starting in reporting period, aged 0 to 18, that were self-referrals
+
 ### 2024-09
 
 Compared with 2024-08.
@@ -374,9 +374,8 @@ Compared with 2024-08.
 
 Provider list churn this release 3 added, 3 removed, 2 renamed.
 
-**One off jumps in England values (3)**
+**One off jumps in England values (2)**
 
-- `CCR117b` moved from 439 to 767 (x1.75) New Very Urgent Referrals to Crisis Care teams in the reporting period, Aged under 18
 - `PLS121b` moved from 1,575 to 2,485 (x1.58) New referrals to liaison psychiatry teams from A&E in the reporting period, Aged under 18
 - `PLS122b` moved from 1,160 to 1,821 (x1.57) New referrals to liaison psychiatry teams from A&E in the reporting period with first face to face contact, Aged under 18
 
@@ -633,190 +632,29 @@ Provider list churn this release 19 added, 2 removed, 1 renamed.
 
 Compared with 2025-07.
 
-**Measures removed (21)**
+Provider list churn this release 7 added, 4 removed, 3 renamed.
 
-- `MHS156c` Number of discharges in the RP for people aged 18 and over from adult acute and PICU beds
-- `MHS156d` Total bed days for discharges in the RP for people aged 18 and over from adult acute and PICU beds
-- `MHS156e` Mean Length of stay for discharges in the RP for people aged 18 and over from adult acute and PICU beds
-- `MHS156f` Number of discharges in the RP for people aged 18 and over from older adult acute beds
-- `MHS156g` Total bed days for discharges in the RP for people aged 18 and over from older adult acute beds
-- `MHS156h` Mean Length of stay for discharges in the RP for people aged 18 and over from older adult acute beds
-- `MHS157d` Absolute mean deviation between White and other upper ethnicities of direct standardised rate per 100,000 of detentions in the reporting period (12 month rolling)
-- `MHS157f` Absolute difference between White and non-White ethnicity of direct standardised rate per 100,000 of detentions in the reporting period (12 month rolling)
-- `MHS157g` Absolute difference between most deprived quintile and all other quintiles combined of direct standardised rate per 100,000 of detentions in the reporting period (12 month rolling)
-- `MHS158d` Absolute mean deviation between White and other upper ethnicities of direct standardised rate per 100,000 of CTOs in the reporting period (12 month rolling)
-- `MHS158f` Absolute difference between White and non-White ethnicity of direct standardised rate per 100,000 of CTOs in the reporting period (12 month rolling)
-- `MHS158g` Absolute difference between most deprived quintile and all other quintiles combined of direct standardised rate per 100,000 of CTOs in the reporting period (12 month rolling)
-- `MHS159` Number of CYP aged under 18 supported through NHS funded mental health with at least one contact with an education-based mental health support team (12 month rolling)
-- `MHS160` Number of closed referrals from CMH services in the RP for people aged 18 and over with at least 2 contacts
-- `MHS161` Number of closed referrals from CMH services in the RP for people aged 18 and over with at least 2 contacts and any perspective paired score
-- `MHS162` Proportion of closed referrals from CMH services in the RP for people aged 18 and over with at least 2 contacts and any perspective paired score
-- `MHS163` Number of hospital spells discharged in the RP from adult acute, older adult acute, or PICU beds eligible for readmission
-- `MHS164` Number of hospital spells in the RP readmitted within 14 days, where bed type is adult acute, older adult acute, or PICU
-- `MHS165` Proportion of hospital spells in the RP readmitted within 14 days, where bed type is adult acute, older adult acute, or PICU
-- `MHS95d` Absolute mean deviation between White and other upper ethnicities of direct standardised rate per 100,000 of CYP aged under 18 supported through NHS Funded mental health with at least one contact (12 month rolling)
-- `MHS95g` Absolute difference between most deprived quintile and all other quintiles combined of direct standardised rate per 100,000 of CYP aged under 18 supported through NHS funded mental health with at least one contact (12 month rolling)
+**One off jumps in England values (1)**
 
-**Measures renamed with the same ID (14)**
-
-- `AMH01` was "People with an open referral with adult mental health services at the end of the reporting period" and is now "People in contact with adult mental health services at the end of the reporting period"
-- `CYP01` was "People with an open referral with children and young people's mental health services at the end of the reporting period" and is now "People in contact with children and young people's mental health services at the end of the reporting period"
-- `LDA01` was "People with an open referral with Learning Disabilities and Autism services at the end of the reporting period" and is now "People in contact with Learning Disabilities and Autism services at the end of the reporting period"
-- `MH01` was "People with an open referral with mental health services at the end of the reporting period" and is now "People in contact with mental health services at the end of the reporting period"
-- `MH01a` was "People with an open referral with mental health services aged 0 to 18 at the end of the reporting period" and is now "People in contact with mental health services aged 0 to 18 at the end of the reporting period"
-- `MH01b` was "People with an open referral with mental health services aged 19 to 64 at the end of the reporting period" and is now "People in contact with mental health services aged 19 to 64 at the end of the reporting period"
-- `MH01c` was "People with an open referral with mental health services aged 65 and over at the end of the reporting period" and is now "People in contact with mental health services aged 65 and over at the end of the reporting period"
-- `MHS01` was "People with an open referral with services at the end of the reporting period" and is now "People in contact with services at the end of the reporting period"
-- `MHS13` was "People with an open referral with services at the end of the reporting period with accommodation status recorded" and is now "People in contact with services at the end of the reporting period with accommodation status recorded"
-- `MHS16` was "People with an open referral with services at the end of the reporting period with employment status recorded" and is now "People in contact with services at the end of the reporting period with employment status recorded"
-- `MHS20` was "People with an open referral with services at the end of the reporting period with a diagnosis recorded" and is now "People in contact with services at the end of the reporting period with a diagnosis recorded"
-- `MHS78` was "Discharges from adult acute and rehabilitation beds eligible for 72 hour follow up in the reporting period" and is now "Discharges from adult acute beds eligible for 72 hour follow up in the reporting period"
-- `MHS79` was "Discharges from adult acute and rehabilitation beds followed up within 72 hours in the reporting period" and is now "Discharges from adult acute beds followed up within 72 hours in the reporting period"
-- `MHS80` was "Proportion of discharges from adult acute and rehabilitation beds eligible for 72 hour follow up - followed up in the reporting period" and is now "Proportion of discharges from adult acute beds eligible for 72 hour follow up - followed up in the reporting period"
-
-**Breakdowns added or removed (10)**
-
-- removed Commissioning Region; Detention Type
-- removed Commissioning Region; IMD - Standardised Rate Difference from Most Deprived Quintile
-- removed Commissioning Region; Legal Status
-- removed Commissioning Region; Mean Deviation of Upper Ethnicity
-- removed England; Detention Type
-- removed England; IMD - Standardised Rate Difference from Most Deprived Quintile
-- removed England; Legal Status
-- removed England; Mean Deviation of Upper Ethnicity
-- removed ICB of GP Practice or Residence; IMD - Standardised Rate Difference from Most Deprived Quintile
-- removed ICB of GP Practice or Residence; Mean Deviation of Upper Ethnicity
-
-**Geography changes (25)**
-
-- Sub ICB code `06H` renamed from NHS CAMBRIDGESHIRE AND PETERBOROUGH ICB - 06H // NHS CENTRAL EAST ICB - 06H to NHS CAMBRIDGESHIRE AND PETERBOROUGH ICB - 06H
-- Sub ICB code `06K` renamed from NHS CENTRAL EAST ICB - 06K // NHS HERTFORDSHIRE AND WEST ESSEX ICB - 06K to NHS HERTFORDSHIRE AND WEST ESSEX ICB - 06K
-- Sub ICB code `06L` renamed from NHS NORFOLK AND SUFFOLK ICB - 06L // NHS SUFFOLK AND NORTH EAST ESSEX ICB - 06L to NHS SUFFOLK AND NORTH EAST ESSEX ICB - 06L
-- Sub ICB code `06N` renamed from NHS CENTRAL EAST ICB - 06N // NHS HERTFORDSHIRE AND WEST ESSEX ICB - 06N to NHS HERTFORDSHIRE AND WEST ESSEX ICB - 06N
-- Sub ICB code `06Q` renamed from NHS ESSEX ICB - 06Q // NHS MID AND SOUTH ESSEX ICB - 06Q to NHS MID AND SOUTH ESSEX ICB - 06Q
-- Sub ICB code `06T` renamed from NHS ESSEX ICB - 06T // NHS SUFFOLK AND NORTH EAST ESSEX ICB - 06T to NHS SUFFOLK AND NORTH EAST ESSEX ICB - 06T
-- Sub ICB code `07G` renamed from NHS ESSEX ICB - 07G // NHS MID AND SOUTH ESSEX ICB - 07G to NHS MID AND SOUTH ESSEX ICB - 07G
-- Sub ICB code `07H` renamed from NHS ESSEX ICB - 07H // NHS HERTFORDSHIRE AND WEST ESSEX ICB - 07H to NHS HERTFORDSHIRE AND WEST ESSEX ICB - 07H
-- Sub ICB code `07K` renamed from NHS NORFOLK AND SUFFOLK ICB - 07K // NHS SUFFOLK AND NORTH EAST ESSEX ICB - 07K to NHS SUFFOLK AND NORTH EAST ESSEX ICB - 07K
-- Sub ICB code `09D` renamed from NHS SURREY AND SUSSEX ICB - 09D // NHS SUSSEX ICB - 09D to NHS SUSSEX ICB - 09D
-- Sub ICB code `10Q` renamed from NHS BUCKINGHAMSHIRE, OXFORDSHIRE AND BERKSHIRE WEST ICB - 10Q // NHS THAMES VALLEY ICB - 10Q to NHS BUCKINGHAMSHIRE, OXFORDSHIRE AND BERKSHIRE WEST ICB - 10Q
-- Sub ICB code `14Y` renamed from NHS BUCKINGHAMSHIRE, OXFORDSHIRE AND BERKSHIRE WEST ICB - 14Y // NHS THAMES VALLEY ICB - 14Y to NHS BUCKINGHAMSHIRE, OXFORDSHIRE AND BERKSHIRE WEST ICB - 14Y
-- Sub ICB code `15A` renamed from NHS BUCKINGHAMSHIRE, OXFORDSHIRE AND BERKSHIRE WEST ICB - 15A // NHS THAMES VALLEY ICB - 15A to NHS BUCKINGHAMSHIRE, OXFORDSHIRE AND BERKSHIRE WEST ICB - 15A
-- Sub ICB code `26A` renamed from NHS NORFOLK AND SUFFOLK ICB - 26A // NHS NORFOLK AND WAVENEY ICB - 26A to NHS NORFOLK AND WAVENEY ICB - 26A
-- Sub ICB code `70F` renamed from NHS SURREY AND SUSSEX ICB - 70F // NHS SUSSEX ICB - 70F to NHS SUSSEX ICB - 70F
-- Sub ICB code `92A` renamed from NHS SURREY AND SUSSEX ICB - 92A // NHS SURREY HEARTLANDS ICB - 92A to NHS SURREY HEARTLANDS ICB - 92A
-- Sub ICB code `93C` renamed from NHS NORTH CENTRAL LONDON ICB - 93C // NHS WEST AND NORTH LONDON ICB - 93C to NHS NORTH CENTRAL LONDON ICB - 93C
-- Sub ICB code `97R` renamed from NHS SURREY AND SUSSEX ICB - 97R // NHS SUSSEX ICB - 97R to NHS SUSSEX ICB - 97R
-- Sub ICB code `99E` renamed from NHS ESSEX ICB - 99E // NHS MID AND SOUTH ESSEX ICB - 99E to NHS MID AND SOUTH ESSEX ICB - 99E
-- Sub ICB code `99F` renamed from NHS ESSEX ICB - 99F // NHS MID AND SOUTH ESSEX ICB - 99F to NHS MID AND SOUTH ESSEX ICB - 99F
-- Sub ICB code `99G` renamed from NHS ESSEX ICB - 99G // NHS MID AND SOUTH ESSEX ICB - 99G to NHS MID AND SOUTH ESSEX ICB - 99G
-- Sub ICB code `D4U1Y` renamed from NHS FRIMLEY CCG // NHS FRIMLEY ICB - D4U1Y to NHS FRIMLEY ICB - D4U1Y
-- Sub ICB code `M1J4Y` renamed from NHS BEDFORDSHIRE, LUTON AND MILTON KEYNES ICB - M1J4Y // NHS CENTRAL EAST ICB - M1J4Y to NHS BEDFORDSHIRE, LUTON AND MILTON KEYNES ICB - M1J4Y
-- Sub ICB code `W2U3Z` renamed from NHS NORTH WEST LONDON ICB - W2U3Z // NHS WEST AND NORTH LONDON ICB - W2U3Z to NHS NORTH WEST LONDON ICB - W2U3Z
-- Local Authority code `E07000083` renamed from Tewkesbury to North Gloucestershire
-
-Provider list churn this release 6 added, 17 removed, 2 renamed.
-
-**One off jumps in England values (8)**
-
-- `CCR119` moved from 1,907 to 3,006 (x1.58) New Very Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact within 4 hours of referral
-- `CCR119a` moved from 1,437 to 2,597 (x1.81) New Very Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact within 4 hours of referral, Aged 18 and over
-- `MHS111d` moved from 8,217 to 5,195 (x0.63) Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a parent-rated perspective assessment
-- `MHS114a` moved from 616 to 410 (x0.67) Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a parent-rated perspective paired score that showed measurable improvement
-- `MHS148` moved from 206,197 to 126,581 (x0.61) Number of open referrals with a Presenting Complaint recorded at the end of the reporting period
-- `MHS38b` moved from 75,509 to 50,310 (x0.67) Referrals active at any point in the Reporting Period, with indirect activity in the RP, aged 0 to 18
-- `MHS41` moved from 733 to 451 (x0.62) Children and young people with a child protection plan with a referral starting in the reporting period, aged 0 to 18
-- `MHS61a` moved from 79,228 to 51,946 (x0.66) First attended contacts for referrals open in the RP, aged 0 to 18
+- `CCR73b` moved from 1,279 to 836 (x0.65) New Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact, Aged under 18
 
 ### 2025-09
 
 Compared with 2025-08.
 
-**Measures added (21)**
+**Breakdowns added or removed (4)**
 
-- `MHS156c` Number of discharges in the RP for people aged 18 and over from adult acute and PICU beds
-- `MHS156d` Total bed days for discharges in the RP for people aged 18 and over from adult acute and PICU beds
-- `MHS156e` Mean Length of stay for discharges in the RP for people aged 18 and over from adult acute and PICU beds
-- `MHS156f` Number of discharges in the RP for people aged 18 and over from older adult acute beds
-- `MHS156g` Total bed days for discharges in the RP for people aged 18 and over from older adult acute beds
-- `MHS156h` Mean Length of stay for discharges in the RP for people aged 18 and over from older adult acute beds
-- `MHS157d` Absolute mean deviation between White and other upper ethnicities of direct standardised rate per 100,000 of detentions in the reporting period (12 month rolling)
-- `MHS157f` Absolute difference between White and non-White ethnicity of direct standardised rate per 100,000 of detentions in the reporting period (12 month rolling)
-- `MHS157g` Absolute difference between most deprived quintile and all other quintiles combined of direct standardised rate per 100,000 of detentions in the reporting period (12 month rolling)
-- `MHS158d` Absolute mean deviation between White and other upper ethnicities of direct standardised rate per 100,000 of CTOs in the reporting period (12 month rolling)
-- `MHS158f` Absolute difference between White and non-White ethnicity of direct standardised rate per 100,000 of CTOs in the reporting period (12 month rolling)
-- `MHS158g` Absolute difference between most deprived quintile and all other quintiles combined of direct standardised rate per 100,000 of CTOs in the reporting period (12 month rolling)
-- `MHS159` Number of CYP aged under 18 supported through NHS funded mental health with at least one contact with an education-based mental health support team (12 month rolling)
-- `MHS160` Number of closed referrals from CMH services in the RP for people aged 18 and over with at least 2 contacts
-- `MHS161` Number of closed referrals from CMH services in the RP for people aged 18 and over with at least 2 contacts and any perspective paired score
-- `MHS162` Proportion of closed referrals from CMH services in the RP for people aged 18 and over with at least 2 contacts and any perspective paired score
-- `MHS163` Number of hospital spells discharged in the RP from adult acute, older adult acute, or PICU beds eligible for readmission
-- `MHS164` Number of hospital spells in the RP readmitted within 14 days, where bed type is adult acute, older adult acute, or PICU
-- `MHS165` Proportion of hospital spells in the RP readmitted within 14 days, where bed type is adult acute, older adult acute, or PICU
-- `MHS95d` Absolute mean deviation between White and other upper ethnicities of direct standardised rate per 100,000 of CYP aged under 18 supported through NHS Funded mental health with at least one contact (12 month rolling)
-- `MHS95g` Absolute difference between most deprived quintile and all other quintiles combined of direct standardised rate per 100,000 of CYP aged under 18 supported through NHS funded mental health with at least one contact (12 month rolling)
+- removed Commissioning Region; Detention Type
+- removed Commissioning Region; Legal Status
+- removed England; Detention Type
+- removed England; Legal Status
 
-**Measures renamed with the same ID (14)**
+Provider list churn this release 1 added, 5 removed, 2 renamed.
 
-- `AMH01` was "People in contact with adult mental health services at the end of the reporting period" and is now "People with an open referral with adult mental health services at the end of the reporting period"
-- `CYP01` was "People in contact with children and young people's mental health services at the end of the reporting period" and is now "People with an open referral with children and young people's mental health services at the end of the reporting period"
-- `LDA01` was "People in contact with Learning Disabilities and Autism services at the end of the reporting period" and is now "People with an open referral with Learning Disabilities and Autism services at the end of the reporting period"
-- `MH01` was "People in contact with mental health services at the end of the reporting period" and is now "People with an open referral with mental health services at the end of the reporting period"
-- `MH01a` was "People in contact with mental health services aged 0 to 18 at the end of the reporting period" and is now "People with an open referral with mental health services aged 0 to 18 at the end of the reporting period"
-- `MH01b` was "People in contact with mental health services aged 19 to 64 at the end of the reporting period" and is now "People with an open referral with mental health services aged 19 to 64 at the end of the reporting period"
-- `MH01c` was "People in contact with mental health services aged 65 and over at the end of the reporting period" and is now "People with an open referral with mental health services aged 65 and over at the end of the reporting period"
-- `MHS01` was "People in contact with services at the end of the reporting period" and is now "People with an open referral with services at the end of the reporting period"
-- `MHS13` was "People in contact with services at the end of the reporting period with accommodation status recorded" and is now "People with an open referral with services at the end of the reporting period with accommodation status recorded"
-- `MHS16` was "People in contact with services at the end of the reporting period with employment status recorded" and is now "People with an open referral with services at the end of the reporting period with employment status recorded"
-- `MHS20` was "People in contact with services at the end of the reporting period with a diagnosis recorded" and is now "People with an open referral with services at the end of the reporting period with a diagnosis recorded"
-- `MHS78` was "Discharges from adult acute beds eligible for 72 hour follow up in the reporting period" and is now "Discharges from adult acute and rehabilitation beds eligible for 72 hour follow up in the reporting period"
-- `MHS79` was "Discharges from adult acute beds followed up within 72 hours in the reporting period" and is now "Discharges from adult acute and rehabilitation beds followed up within 72 hours in the reporting period"
-- `MHS80` was "Proportion of discharges from adult acute beds eligible for 72 hour follow up - followed up in the reporting period" and is now "Proportion of discharges from adult acute and rehabilitation beds eligible for 72 hour follow up - followed up in the reporting period"
+**One off jumps in England values (2)**
 
-**Breakdowns added or removed (6)**
-
-- added Commissioning Region; IMD - Standardised Rate Difference from Most Deprived Quintile
-- added Commissioning Region; Mean Deviation of Upper Ethnicity
-- added England; IMD - Standardised Rate Difference from Most Deprived Quintile
-- added England; Mean Deviation of Upper Ethnicity
-- added ICB of GP Practice or Residence; IMD - Standardised Rate Difference from Most Deprived Quintile
-- added ICB of GP Practice or Residence; Mean Deviation of Upper Ethnicity
-
-**Geography changes (25)**
-
-- Sub ICB code `06H` renamed from NHS CAMBRIDGESHIRE AND PETERBOROUGH ICB - 06H to NHS CAMBRIDGESHIRE AND PETERBOROUGH ICB - 06H // NHS CENTRAL EAST ICB - 06H
-- Sub ICB code `06K` renamed from NHS HERTFORDSHIRE AND WEST ESSEX ICB - 06K to NHS CENTRAL EAST ICB - 06K // NHS HERTFORDSHIRE AND WEST ESSEX ICB - 06K
-- Sub ICB code `06L` renamed from NHS SUFFOLK AND NORTH EAST ESSEX ICB - 06L to NHS NORFOLK AND SUFFOLK ICB - 06L // NHS SUFFOLK AND NORTH EAST ESSEX ICB - 06L
-- Sub ICB code `06N` renamed from NHS HERTFORDSHIRE AND WEST ESSEX ICB - 06N to NHS CENTRAL EAST ICB - 06N // NHS HERTFORDSHIRE AND WEST ESSEX ICB - 06N
-- Sub ICB code `06Q` renamed from NHS MID AND SOUTH ESSEX ICB - 06Q to NHS ESSEX ICB - 06Q // NHS MID AND SOUTH ESSEX ICB - 06Q
-- Sub ICB code `06T` renamed from NHS SUFFOLK AND NORTH EAST ESSEX ICB - 06T to NHS ESSEX ICB - 06T // NHS SUFFOLK AND NORTH EAST ESSEX ICB - 06T
-- Sub ICB code `07G` renamed from NHS MID AND SOUTH ESSEX ICB - 07G to NHS ESSEX ICB - 07G // NHS MID AND SOUTH ESSEX ICB - 07G
-- Sub ICB code `07H` renamed from NHS HERTFORDSHIRE AND WEST ESSEX ICB - 07H to NHS ESSEX ICB - 07H // NHS HERTFORDSHIRE AND WEST ESSEX ICB - 07H
-- Sub ICB code `07K` renamed from NHS SUFFOLK AND NORTH EAST ESSEX ICB - 07K to NHS NORFOLK AND SUFFOLK ICB - 07K // NHS SUFFOLK AND NORTH EAST ESSEX ICB - 07K
-- Sub ICB code `09D` renamed from NHS SUSSEX ICB - 09D to NHS SURREY AND SUSSEX ICB - 09D // NHS SUSSEX ICB - 09D
-- Sub ICB code `10Q` renamed from NHS BUCKINGHAMSHIRE, OXFORDSHIRE AND BERKSHIRE WEST ICB - 10Q to NHS BUCKINGHAMSHIRE, OXFORDSHIRE AND BERKSHIRE WEST ICB - 10Q // NHS THAMES VALLEY ICB - 10Q
-- Sub ICB code `14Y` renamed from NHS BUCKINGHAMSHIRE, OXFORDSHIRE AND BERKSHIRE WEST ICB - 14Y to NHS BUCKINGHAMSHIRE, OXFORDSHIRE AND BERKSHIRE WEST ICB - 14Y // NHS THAMES VALLEY ICB - 14Y
-- Sub ICB code `15A` renamed from NHS BUCKINGHAMSHIRE, OXFORDSHIRE AND BERKSHIRE WEST ICB - 15A to NHS BUCKINGHAMSHIRE, OXFORDSHIRE AND BERKSHIRE WEST ICB - 15A // NHS THAMES VALLEY ICB - 15A
-- Sub ICB code `26A` renamed from NHS NORFOLK AND WAVENEY ICB - 26A to NHS NORFOLK AND SUFFOLK ICB - 26A // NHS NORFOLK AND WAVENEY ICB - 26A
-- Sub ICB code `70F` renamed from NHS SUSSEX ICB - 70F to NHS SURREY AND SUSSEX ICB - 70F // NHS SUSSEX ICB - 70F
-- Sub ICB code `92A` renamed from NHS SURREY HEARTLANDS ICB - 92A to NHS SURREY AND SUSSEX ICB - 92A // NHS SURREY HEARTLANDS ICB - 92A
-- Sub ICB code `93C` renamed from NHS NORTH CENTRAL LONDON ICB - 93C to NHS NORTH CENTRAL LONDON ICB - 93C // NHS WEST AND NORTH LONDON ICB - 93C
-- Sub ICB code `97R` renamed from NHS SUSSEX ICB - 97R to NHS SURREY AND SUSSEX ICB - 97R // NHS SUSSEX ICB - 97R
-- Sub ICB code `99E` renamed from NHS MID AND SOUTH ESSEX ICB - 99E to NHS ESSEX ICB - 99E // NHS MID AND SOUTH ESSEX ICB - 99E
-- Sub ICB code `99F` renamed from NHS MID AND SOUTH ESSEX ICB - 99F to NHS ESSEX ICB - 99F // NHS MID AND SOUTH ESSEX ICB - 99F
-- Sub ICB code `99G` renamed from NHS MID AND SOUTH ESSEX ICB - 99G to NHS ESSEX ICB - 99G // NHS MID AND SOUTH ESSEX ICB - 99G
-- Sub ICB code `D4U1Y` renamed from NHS FRIMLEY ICB - D4U1Y to NHS FRIMLEY CCG // NHS FRIMLEY ICB - D4U1Y
-- Sub ICB code `M1J4Y` renamed from NHS BEDFORDSHIRE, LUTON AND MILTON KEYNES ICB - M1J4Y to NHS BEDFORDSHIRE, LUTON AND MILTON KEYNES ICB - M1J4Y // NHS CENTRAL EAST ICB - M1J4Y
-- Sub ICB code `W2U3Z` renamed from NHS NORTH WEST LONDON ICB - W2U3Z to NHS NORTH WEST LONDON ICB - W2U3Z // NHS WEST AND NORTH LONDON ICB - W2U3Z
-- Local Authority code `E07000083` renamed from North Gloucestershire to Tewkesbury
-
-Provider list churn this release 15 added, 5 removed, 4 renamed.
-
-**One off jumps in England values (3)**
-
-- `CCR118a` moved from 3,086 to 1,995 (x0.65) New Very Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact, Aged 18 and over
-- `CCR119a` moved from 2,597 to 1,492 (x0.57) New Very Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact within 4 hours of referral, Aged 18 and over
-- `MHS148` moved from 126,581 to 237,410 (x1.88) Number of open referrals with a Presenting Complaint recorded at the end of the reporting period
+- `CCR118b` moved from 492 to 779 (x1.58) New Very Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact, Aged under 18
+- `CCR119b` moved from 385 to 593 (x1.54) New Very Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact within 4 hours of referral, Aged under 18
 
 ### 2025-10
 
@@ -1024,30 +862,42 @@ Compared with 2026-05.
 
 Provider list churn this release 5 added, 7 removed, 0 renamed.
 
+### 2026-08
+
+Compared with 2026-07.
+
+Provider list churn this release 5 added, 2 removed, 2 renamed.
+
+**One off jumps in England values (3)**
+
+- `MHS110` moved from 55,836 to 37,029 (x0.66) Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts
+- `MHS112d` moved from 2,935 to 1,845 (x0.63) Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a parent-rated perspective paired score
+- `MHS114e` moved from 1,728 to 1,049 (x0.61) Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a parent-rated perspective paired score that showed no measurable change
+
 ## Recurring seasonal or financial year jumps
 
 These measures jump in the same calendar month in more than one year, so the jump is a pattern to model rather than a break to correct.
 
 | Measure | Months flagged | Typical factor | Name |
 |---|---|---:|---|
+| `CCR117b` | 2024-09, 2025-09 | 1.64 | New Very Urgent Referrals to Crisis Care teams in the reporting period, Aged under 18 |
+| `CCR120b` | 2023-08, 2025-08 | 0.66 | New Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact within 24 hours of referral, Aged under 18 |
 | `CCR70b` | 2022-12, 2024-12 | 0.64 | New Emergency Referrals to Crisis Care teams in the reporting period, Aged under 18 |
 | `CCR73b` | 2022-09, 2023-09 | 1.62 | New Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact, Aged under 18 |
 | `CYP32` | 2022-08, 2023-08, 2024-08, 2024-09, 2025-08, 2025-09, 2026-08 | 0.62 | Referrals to children and young people's mental health services starting in RP |
 | `CYP32a` | 2022-08, 2023-08, 2024-08, 2024-09, 2025-08, 2025-09, 2026-08 | 0.62 | Referrals to children and young people's mental health services starting in RP, 0 to 18 |
-| `MHS110` | 2025-08, 2026-08 | 0.67 | Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts |
-| `MHS111` | 2024-08, 2025-08, 2026-08 | 0.62 | Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and any assessment |
+| `MHS111` | 2024-08, 2025-08, 2026-08 | 0.64 | Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and any assessment |
 | `MHS111b` | 2024-08, 2025-07, 2025-08, 2026-07, 2026-08 | 0.62 | Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective assessment |
 | `MHS112` | 2024-08, 2025-07, 2025-08, 2026-07, 2026-08 | 0.61 | Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and any perspective paired score |
 | `MHS112b` | 2024-08, 2025-07, 2025-08, 2026-07, 2026-08 | 0.57 | Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective paired score |
-| `MHS112d` | 2024-07, 2025-07, 2025-08, 2026-07, 2026-08 | 1.51 | Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a parent-rated perspective paired score |
-| `MHS113a` | 2024-07, 2024-08, 2025-07, 2025-08, 2026-07, 2026-08 | 1.02 | Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective paired score that showed measurable improvement |
+| `MHS112d` | 2024-07, 2025-07, 2026-07 | 1.53 | Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a parent-rated perspective paired score |
+| `MHS113a` | 2024-07, 2024-08, 2025-07, 2025-08, 2026-07, 2026-08 | 1.04 | Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective paired score that showed measurable improvement |
 | `MHS113c` | 2024-08, 2025-08, 2026-08 | 0.58 | Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective paired score that showed measurable deterioration |
 | `MHS113e` | 2024-08, 2025-07, 2025-08, 2026-07, 2026-08 | 0.61 | Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective paired score that showed no measurable change |
-| `MHS114e` | 2024-07, 2025-07, 2025-08, 2026-07, 2026-08 | 1.63 | Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a parent-rated perspective paired score that showed no measurable change |
+| `MHS114e` | 2024-07, 2025-07, 2026-07 | 1.63 | Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a parent-rated perspective paired score that showed no measurable change |
 | `MHS32a` | 2024-08, 2024-09, 2025-08, 2025-09, 2026-08 | 0.65 | Referrals starting in RP, aged 0 to 18 |
-| `MHS32b` | 2024-08, 2025-08 | 0.66 | Referrals starting in reporting period, aged 0 to 18, that were self-referrals |
 | `MHS39a` | 2024-08, 2024-09, 2025-08, 2025-09, 2026-08 | 0.64 | People with a referral starting in the reporting period, aged 0 to 18 |
-| `MHS42` | 2022-08, 2023-08, 2023-09, 2024-08, 2024-09, 2025-08, 2025-09, 2026-08 | 0.55 | Young carers with a referral starting in the reporting period, aged 0 to 18 |
+| `MHS42` | 2022-08, 2023-08, 2023-09, 2024-08, 2024-09, 2025-08, 2025-09, 2026-08 | 0.56 | Young carers with a referral starting in the reporting period, aged 0 to 18 |
 | `MHS69` | 2023-04, 2024-04, 2024-05, 2025-04, 2025-08, 2026-04, 2026-05, 2026-08 | 1.69 | The number of children and young people, regardless of when their referral started, receiving at least two contacts (including indirect contacts) and where their first contact occurs before their 18th birthday |
 | `PLS123b` | 2023-09, 2024-09 | 1.61 | New referrals to liaison psychiatry teams from A&E in the reporting period with first face to face contact within 1 hour, Aged under 18 |
 
