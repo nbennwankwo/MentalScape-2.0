@@ -1,0 +1,11 @@
+# Store text with Unix line endings so files diff cleanly on every machine.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.pdf binary
+*.zip binary
+
+# Generated reference tables are data, so hide them from language statistics.
+data/reference/*.csv linguist-generated=true
+docs/data/mhsds_change_log_detail.md linguist-generated=true

@@ -1,0 +1,69 @@
+# Machine readable register of data sources.
+# The ingest code in Phase 1 reads this file. Human notes are in docs/04_data_sources.md.
+# A url of null means the exact location is still to be confirmed in Phase 1.
+
+sources:
+  mhsds_monthly:
+    title: Mental Health Services Monthly Statistics
+    publisher: NHS England
+    series_page: https://digital.nhs.uk/data-and-information/publications/statistical/mental-health-services-monthly-statistics
+    release_page_pattern: "{series_page}/performance-{month_name}-{year}"
+    cadence: monthly
+    first_month_in_scope: "2022-07"
+    files_wanted:
+      - main data file
+      - out of area placements
+      - referral spells
+      - restrictive interventions
+      - data coverage file
+      - data quality VODIM and integrity file
+    versions: [Performance, End of Year Final]
+    version_rule: prefer End of Year Final when it exists, keep both in raw
+    licence: Open Government Licence v3.0
+    status: profiled in Phase 0
+
+  talking_therapies_monthly:
+    title: NHS Talking Therapies for anxiety and depression, monthly statistics
+    publisher: NHS England
+    series_page: null
+    cadence: monthly
+    licence: Open Government Licence v3.0
+    status: legacy copies exist for July 2022 to June 2025, to automate in Phase 1
+
+  indices_of_deprivation_2025:
+    title: English Indices of Deprivation 2025
+    publisher: Ministry of Housing, Communities and Local Government
+    release_page: https://www.gov.uk/government/statistics/english-indices-of-deprivation-2025
+    geography: LSOA 2021, 33755 areas
+    published: "2025-10-30"
+    licence: Open Government Licence v3.0
+    status: to load in Phase 1
+    caution: not a time series against IoD 2019, use as a snapshot
+
+  ons_population_estimates:
+    title: Mid year population estimates by age and sex
+    publisher: Office for National Statistics
+    series_page: null
+    licence: Open Government Licence v3.0
+    status: to load in Phase 1
+    caution: estimates on the April 2026 ICB boundaries are due from ONS in autumn 2026
+
+  ons_geography_lookups:
+    title: LSOA 2021 to Sub ICB, ICB and region lookups, including April 2026 boundaries
+    publisher: Office for National Statistics Open Geography Portal
+    series_page: null
+    licence: Open Government Licence v3.0
+    status: to load in Phase 1
+
+  nhs_workforce:
+    title: NHS Workforce Statistics, mental health staff groups
+    publisher: NHS England
+    series_page: null
+    licence: Open Government Licence v3.0
+    status: legacy copies exist, to automate in Phase 1
+
+  mhsds_patient_level:
+    title: Mental Health Services Data Set, pseudonymised record level
+    publisher: NHS England via the Data Access Request Service
+    licence: data sharing agreement required
+    status: enquiry sent October 2026, not available

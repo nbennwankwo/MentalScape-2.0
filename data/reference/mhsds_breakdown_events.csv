@@ -1,0 +1,114 @@
+release_month,compared_with,event,breakdown
+2023-04,2023-03,added,England; Ethnicity (White British/Non-White British)
+2023-04,2023-03,added,England; Upper Ethnicity
+2023-04,2023-03,added,ICB - GP Practice or Residence
+2023-04,2023-03,added,ICB of Residence
+2023-04,2023-03,added,ICB of Residence; Ethnicity (White British/Non-White British)
+2023-04,2023-03,added,Provider; Age
+2023-04,2023-03,added,Provider; Gender
+2023-04,2023-03,added,Provider; IMD Decile
+2023-04,2023-03,added,Sub ICB - GP Practice or Residence; Age
+2023-04,2023-03,added,Sub ICB - GP Practice or Residence; Gender
+2023-04,2023-03,added,Sub ICB - GP Practice or Residence; IMD Decile
+2023-04,2023-03,added,Sub ICB of Residence; Provider
+2023-04,2023-03,removed,Ethnicity (White British/Non-White British)
+2023-04,2023-03,removed,ICB
+2023-04,2023-03,removed,ICB; Ethnicity (White British/Non-White British)
+2023-04,2023-03,removed,Sub ICB; Provider
+2024-04,2024-03,added,England; Age Band
+2024-04,2024-03,added,ICB of GP Practice or Residence
+2024-04,2024-03,added,ICB of GP Practice or Residence; Ethnicity (White British/Non-White British)
+2024-04,2024-03,added,Sub ICB of GP Practice or Residence
+2024-04,2024-03,added,Sub ICB of GP Practice or Residence; Provider
+2024-04,2024-03,removed,ICB of Residence
+2024-04,2024-03,removed,ICB of Residence; Ethnicity (White British/Non-White British)
+2024-04,2024-03,removed,Sub ICB of Residence
+2024-04,2024-03,removed,Sub ICB of Residence; Provider
+2024-09,2024-08,added,ICB of GP Practice or Residence; Upper Ethnicity
+2024-09,2024-08,added,Provider; Upper Ethnicity
+2024-10,2024-09,added,Provider; Age Band
+2024-10,2024-09,added,Sub ICB of GP Practice or Residence; Age Band
+2024-10,2024-09,added,Sub ICB of GP Practice or Residence; Gender
+2024-10,2024-09,added,Sub ICB of GP Practice or Residence; IMD Decile
+2024-10,2024-09,added,Sub ICB of GP Practice or Residence; Upper Ethnicity
+2024-10,2024-09,removed,Provider; Age
+2024-10,2024-09,removed,Sub ICB - GP Practice or Residence; Age
+2024-10,2024-09,removed,Sub ICB - GP Practice or Residence; Gender
+2024-10,2024-09,removed,Sub ICB - GP Practice or Residence; IMD Decile
+2025-01,2024-12,added,England; Rural/Urban Classification
+2025-04,2025-03,added,England; Primary reason for referral
+2025-04,2025-03,added,England; Service or Team Type Referred To
+2025-07,2025-06,added,Commissioning Region; Age Band
+2025-07,2025-06,added,Commissioning Region; Age; Under 18 or 18 and over
+2025-07,2025-06,added,Commissioning Region; Autism Status
+2025-07,2025-06,added,Commissioning Region; Detention Type
+2025-07,2025-06,added,Commissioning Region; Ethnicity
+2025-07,2025-06,added,Commissioning Region; Ethnicity (White British/Non-White British)
+2025-07,2025-06,added,Commissioning Region; Ethnicity - Standardised Rate Difference from White British
+2025-07,2025-06,added,Commissioning Region; Gender
+2025-07,2025-06,added,Commissioning Region; IMD - Standardised Rate Difference from Most Deprived Quintile
+2025-07,2025-06,added,Commissioning Region; IMD Core20
+2025-07,2025-06,added,Commissioning Region; IMD Decile
+2025-07,2025-06,added,Commissioning Region; IMD Quintile
+2025-07,2025-06,added,Commissioning Region; LD Status
+2025-07,2025-06,added,Commissioning Region; Legal Status
+2025-07,2025-06,added,Commissioning Region; Mean Deviation of Upper Ethnicity
+2025-07,2025-06,added,Commissioning Region; Upper Ethnicity
+2025-07,2025-06,added,England; Age; Under 18 or 18 and over
+2025-07,2025-06,added,England; Autism Status
+2025-07,2025-06,added,England; Detention Type
+2025-07,2025-06,added,England; Ethnicity - Standardised Rate Difference from White British
+2025-07,2025-06,added,England; IMD - Standardised Rate Difference from Most Deprived Quintile
+2025-07,2025-06,added,England; IMD Core20
+2025-07,2025-06,added,England; IMD Quintile
+2025-07,2025-06,added,England; LD Status
+2025-07,2025-06,added,England; Legal Status
+2025-07,2025-06,added,England; Mean Deviation of Upper Ethnicity
+2025-07,2025-06,added,ICB of GP Practice or Residence; Age Band
+2025-07,2025-06,added,ICB of GP Practice or Residence; Age; Under 18 or 18 and over
+2025-07,2025-06,added,ICB of GP Practice or Residence; Autism Status
+2025-07,2025-06,added,ICB of GP Practice or Residence; Ethnicity
+2025-07,2025-06,added,ICB of GP Practice or Residence; Ethnicity - Standardised Rate Difference from White British
+2025-07,2025-06,added,ICB of GP Practice or Residence; Gender
+2025-07,2025-06,added,ICB of GP Practice or Residence; IMD - Standardised Rate Difference from Most Deprived Quintile
+2025-07,2025-06,added,ICB of GP Practice or Residence; IMD Core20
+2025-07,2025-06,added,ICB of GP Practice or Residence; IMD Decile
+2025-07,2025-06,added,ICB of GP Practice or Residence; IMD Quintile
+2025-07,2025-06,added,ICB of GP Practice or Residence; LD Status
+2025-07,2025-06,added,ICB of GP Practice or Residence; Mean Deviation of Upper Ethnicity
+2025-07,2025-06,added,Provider; Age; Under 18 or 18 and over
+2025-07,2025-06,added,Provider; Autism Status
+2025-07,2025-06,added,Provider; LD Status
+2025-07,2025-06,added,Sub ICB of GP Practice or Residence; Age; Under 18 or 18 and over
+2025-07,2025-06,added,Sub ICB of GP Practice or Residence; Autism Status
+2025-07,2025-06,added,Sub ICB of GP Practice or Residence; Ethnicity
+2025-07,2025-06,added,Sub ICB of GP Practice or Residence; LD Status
+2025-08,2025-07,removed,Commissioning Region; Detention Type
+2025-08,2025-07,removed,Commissioning Region; IMD - Standardised Rate Difference from Most Deprived Quintile
+2025-08,2025-07,removed,Commissioning Region; Legal Status
+2025-08,2025-07,removed,Commissioning Region; Mean Deviation of Upper Ethnicity
+2025-08,2025-07,removed,England; Detention Type
+2025-08,2025-07,removed,England; IMD - Standardised Rate Difference from Most Deprived Quintile
+2025-08,2025-07,removed,England; Legal Status
+2025-08,2025-07,removed,England; Mean Deviation of Upper Ethnicity
+2025-08,2025-07,removed,ICB of GP Practice or Residence; IMD - Standardised Rate Difference from Most Deprived Quintile
+2025-08,2025-07,removed,ICB of GP Practice or Residence; Mean Deviation of Upper Ethnicity
+2025-09,2025-08,added,Commissioning Region; IMD - Standardised Rate Difference from Most Deprived Quintile
+2025-09,2025-08,added,Commissioning Region; Mean Deviation of Upper Ethnicity
+2025-09,2025-08,added,England; IMD - Standardised Rate Difference from Most Deprived Quintile
+2025-09,2025-08,added,England; Mean Deviation of Upper Ethnicity
+2025-09,2025-08,added,ICB of GP Practice or Residence; IMD - Standardised Rate Difference from Most Deprived Quintile
+2025-09,2025-08,added,ICB of GP Practice or Residence; Mean Deviation of Upper Ethnicity
+2025-10,2025-09,added,Commissioning Region; Detention Type
+2025-10,2025-09,added,Commissioning Region; Legal Status
+2025-10,2025-09,added,England; Detention Type
+2025-10,2025-09,added,England; Legal Status
+2026-04,2026-03,added,England; Intervention
+2026-04,2026-03,removed,Commissioning Region; Detention Type
+2026-04,2026-03,removed,Commissioning Region; Legal Status
+2026-04,2026-03,removed,England; Detention Type
+2026-04,2026-03,removed,England; Legal Status
+2026-06,2026-05,added,Commissioning Region; Detention Type
+2026-06,2026-05,added,Commissioning Region; Legal Status
+2026-06,2026-05,added,England; Detention Type
+2026-06,2026-05,added,England; Legal Status

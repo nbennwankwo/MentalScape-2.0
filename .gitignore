@@ -1,0 +1,46 @@
+# Data never goes into git. Raw NHS files are downloaded by the pipeline.
+data/raw/
+data/interim/
+data/processed/
+data/**/*.zip
+!data/reference/
+!data/reference/*.csv
+!data/README.md
+
+# Large or binary outputs
+*.parquet
+*.duckdb
+*.duckdb.wal
+*.db
+*.sqlite
+*.pkl
+*.joblib
+models/artifacts/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.python-version.local
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Secrets and local settings
+.env
+.env.*
+!.env.example
+
+# Editors and operating systems
+.DS_Store
+.vscode/
+.idea/
+.kiro/

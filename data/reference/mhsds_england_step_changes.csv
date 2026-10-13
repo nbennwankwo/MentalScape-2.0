@@ -1,0 +1,150 @@
+release_month,measure_id,measure_name,previous_value,value,ratio,pattern
+2022-08,CYP32,Referrals to children and young people's mental health services starting in RP,75726.0,48467.0,0.64,recurring in this calendar month
+2022-08,CYP32a,"Referrals to children and young people's mental health services starting in RP, 0 to 18",72673.0,46112.0,0.63,recurring in this calendar month
+2022-08,MHS42,"Young carers with a referral starting in the reporting period, aged 0 to 18",626.0,377.0,0.6,recurring in this calendar month
+2022-09,CCR73b,"New Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact, Aged under 18",692.0,1064.0,1.54,recurring in this calendar month
+2022-12,CCR70b,"New Emergency Referrals to Crisis Care teams in the reporting period, Aged under 18",867.0,528.0,0.61,recurring in this calendar month
+2022-12,CCR72b,"New Emergency Referrals to Crisis Care teams in the Reporting Period, with first face to face contact. Aged under 18",663.0,407.0,0.61,one off
+2022-12,CCR73b,"New Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact, Aged under 18",1179.0,766.0,0.65,one off
+2022-12,MHS32b,"Referrals starting in reporting period, aged 0 to 18, that were self-referrals",10021.0,6192.0,0.62,one off
+2022-12,MHS42,"Young carers with a referral starting in the reporting period, aged 0 to 18",700.0,459.0,0.66,one off
+2022-12,MHS69,"The number of children and young people, regardless of when their referral started, receiving at least two contacts (including indirect contacts) and where their first contact occurs before their 18th birthday",37831.0,24664.0,0.65,one off
+2023-01,CCR70b,"New Emergency Referrals to Crisis Care teams in the reporting period, Aged under 18",528.0,882.0,1.67,one off
+2023-01,CCR72b,"New Emergency Referrals to Crisis Care teams in the Reporting Period, with first face to face contact. Aged under 18",407.0,642.0,1.58,one off
+2023-01,CCR73b,"New Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact, Aged under 18",766.0,1187.0,1.55,one off
+2023-01,MHS32b,"Referrals starting in reporting period, aged 0 to 18, that were self-referrals",6192.0,9755.0,1.58,one off
+2023-04,CCR71,New Urgent Referrals to Crisis Care teams in the reporting period,18703.0,34108.0,1.82,one off
+2023-04,CCR71a,"New Urgent Referrals to Crisis Care teams in the reporting period, Aged 18 and over",16342.0,30972.0,1.9,one off
+2023-04,CYP32,Referrals to children and young people's mental health services starting in RP,104891.0,66863.0,0.64,one off
+2023-04,CYP32a,"Referrals to children and young people's mental health services starting in RP, 0 to 18",101641.0,65024.0,0.64,one off
+2023-04,MHS32b,"Referrals starting in reporting period, aged 0 to 18, that were self-referrals",10560.0,6599.0,0.62,one off
+2023-04,MHS69,"The number of children and young people, regardless of when their referral started, receiving at least two contacts (including indirect contacts) and where their first contact occurs before their 18th birthday",35006.0,94811.0,2.71,recurring in this calendar month
+2023-04,MHS92,Closed referrals for children and young people aged between 0 and 17 with 2 contacts where the length of referral was over 14 days and a paired score,6875.0,1389.0,0.2,one off
+2023-04,MHS93,Closed referrals for children and young people aged between 0 and 17 with 2 contacts where the length of referral was over 14 days,29305.0,8046.0,0.27,one off
+2023-05,MHS92,Closed referrals for children and young people aged between 0 and 17 with 2 contacts where the length of referral was over 14 days and a paired score,1389.0,4920.0,3.54,one off
+2023-05,MHS93,Closed referrals for children and young people aged between 0 and 17 with 2 contacts where the length of referral was over 14 days,8046.0,20168.0,2.51,one off
+2023-08,CCR120b,"New Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact within 24 hours of referral, Aged under 18",643.0,422.0,0.66,one off
+2023-08,CYP32,Referrals to children and young people's mental health services starting in RP,82712.0,51189.0,0.62,recurring in this calendar month
+2023-08,CYP32a,"Referrals to children and young people's mental health services starting in RP, 0 to 18",80599.0,49649.0,0.62,recurring in this calendar month
+2023-08,MHS42,"Young carers with a referral starting in the reporting period, aged 0 to 18",742.0,368.0,0.5,recurring in this calendar month
+2023-09,CCR120b,"New Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact within 24 hours of referral, Aged under 18",422.0,741.0,1.76,one off
+2023-09,CCR70b,"New Emergency Referrals to Crisis Care teams in the reporting period, Aged under 18",552.0,829.0,1.5,one off
+2023-09,CCR71b,"New Urgent Referrals to Crisis Care teams in the reporting period, Aged under 18",2083.0,3272.0,1.57,one off
+2023-09,CCR73b,"New Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact, Aged under 18",680.0,1161.0,1.71,recurring in this calendar month
+2023-09,MHS42,"Young carers with a referral starting in the reporting period, aged 0 to 18",368.0,660.0,1.79,recurring in this calendar month
+2023-09,PLS123b,"New referrals to liaison psychiatry teams from A&E in the reporting period with first face to face contact within 1 hour, Aged under 18",512.0,845.0,1.65,recurring in this calendar month
+2023-12,CCR120b,"New Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact within 24 hours of referral, Aged under 18",831.0,549.0,0.66,one off
+2024-04,MHS30f,Attended contacts in the RP with community mental health services for adult and older adults with severe mental illness,805364.0,256051.0,0.32,one off
+2024-04,MHS69,"The number of children and young people, regardless of when their referral started, receiving at least two contacts (including indirect contacts) and where their first contact occurs before their 18th birthday",33498.0,106611.0,3.18,recurring in this calendar month
+2024-04,MHS79,Discharges from adult acute and rehabilitation beds followed up within 72 hours in the reporting period,4812.0,3110.0,0.65,one off
+2024-05,MHS68,"All referrals, aged 0 to 18, with any one or more SNOMED Codes and valid PERS score from MH Assessment Scale Current View in RP",1861.0,1184.0,0.64,one off
+2024-05,MHS69,"The number of children and young people, regardless of when their referral started, receiving at least two contacts (including indirect contacts) and where their first contact occurs before their 18th birthday",106611.0,69831.0,0.66,recurring in this calendar month
+2024-07,MHS112d,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a parent-rated perspective paired score,993.0,1560.0,1.57,recurring in this calendar month
+2024-07,MHS113a,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective paired score that showed measurable improvement,2744.0,4165.0,1.52,recurring in this calendar month
+2024-07,MHS114e,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a parent-rated perspective paired score that showed no measurable change,551.0,927.0,1.68,recurring in this calendar month
+2024-08,CYP32,Referrals to children and young people's mental health services starting in RP,73416.0,41393.0,0.56,recurring in this calendar month
+2024-08,CYP32a,"Referrals to children and young people's mental health services starting in RP, 0 to 18",70056.0,38181.0,0.55,recurring in this calendar month
+2024-08,MHS111,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and any assessment,17542.0,11537.0,0.66,recurring in this calendar month
+2024-08,MHS111b,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective assessment,13425.0,8352.0,0.62,recurring in this calendar month
+2024-08,MHS112,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and any perspective paired score,10339.0,6285.0,0.61,recurring in this calendar month
+2024-08,MHS112b,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective paired score,8410.0,4806.0,0.57,recurring in this calendar month
+2024-08,MHS113a,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective paired score that showed measurable improvement,4165.0,2194.0,0.53,recurring in this calendar month
+2024-08,MHS113c,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective paired score that showed measurable deterioration,741.0,476.0,0.64,recurring in this calendar month
+2024-08,MHS113e,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective paired score that showed no measurable change,3504.0,2136.0,0.61,recurring in this calendar month
+2024-08,MHS32a,"Referrals starting in RP, aged 0 to 18",110222.0,66156.0,0.6,recurring in this calendar month
+2024-08,MHS32b,"Referrals starting in reporting period, aged 0 to 18, that were self-referrals",7556.0,4889.0,0.65,recurring in this calendar month
+2024-08,MHS39a,"People with a referral starting in the reporting period, aged 0 to 18",88727.0,52322.0,0.59,recurring in this calendar month
+2024-08,MHS42,"Young carers with a referral starting in the reporting period, aged 0 to 18",675.0,332.0,0.49,recurring in this calendar month
+2024-09,CCR117b,"New Very Urgent Referrals to Crisis Care teams in the reporting period, Aged under 18",439.0,767.0,1.75,one off
+2024-09,CYP32,Referrals to children and young people's mental health services starting in RP,41393.0,65936.0,1.59,recurring in this calendar month
+2024-09,CYP32a,"Referrals to children and young people's mental health services starting in RP, 0 to 18",38181.0,63641.0,1.67,recurring in this calendar month
+2024-09,MHS32a,"Referrals starting in RP, aged 0 to 18",66156.0,102026.0,1.54,recurring in this calendar month
+2024-09,MHS39a,"People with a referral starting in the reporting period, aged 0 to 18",52322.0,81315.0,1.55,recurring in this calendar month
+2024-09,MHS42,"Young carers with a referral starting in the reporting period, aged 0 to 18",332.0,658.0,1.98,recurring in this calendar month
+2024-09,PLS121b,"New referrals to liaison psychiatry teams from A&E in the reporting period, Aged under 18",1575.0,2485.0,1.58,one off
+2024-09,PLS122b,"New referrals to liaison psychiatry teams from A&E in the reporting period with first face to face contact, Aged under 18",1160.0,1821.0,1.57,one off
+2024-09,PLS123b,"New referrals to liaison psychiatry teams from A&E in the reporting period with first face to face contact within 1 hour, Aged under 18",671.0,1059.0,1.58,recurring in this calendar month
+2024-10,MHS68,"All referrals, aged 0 to 18, with any one or more SNOMED Codes and valid PERS score from MH Assessment Scale Current View in RP",752.0,2146.0,2.85,one off
+2024-12,CCR70b,"New Emergency Referrals to Crisis Care teams in the reporting period, Aged under 18",787.0,523.0,0.66,recurring in this calendar month
+2025-04,CCR118a,"New Very Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact, Aged 18 and over",1140.0,1938.0,1.7,one off
+2025-04,CCR119,New Very Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact within 4 hours of referral,1189.0,1913.0,1.61,one off
+2025-04,CCR119a,"New Very Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact within 4 hours of referral, Aged 18 and over",732.0,1561.0,2.13,one off
+2025-04,MHS69,"The number of children and young people, regardless of when their referral started, receiving at least two contacts (including indirect contacts) and where their first contact occurs before their 18th birthday",37374.0,118060.0,3.16,recurring in this calendar month
+2025-05,CCR118,New Very Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact,2435.0,3708.0,1.52,one off
+2025-05,CCR118a,"New Very Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact, Aged 18 and over",1938.0,3014.0,1.56,one off
+2025-05,CCR119,New Very Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact within 4 hours of referral,1913.0,3039.0,1.59,one off
+2025-05,CCR119a,"New Very Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact within 4 hours of referral, Aged 18 and over",1561.0,2528.0,1.62,one off
+2025-05,MHS30f,Attended contacts in the RP with community mental health services for adult and older adults with severe mental illness,312072.0,950917.0,3.05,one off
+2025-07,CCR118a,"New Very Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact, Aged 18 and over",3266.0,2096.0,0.64,one off
+2025-07,CCR119,New Very Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact within 4 hours of referral,3317.0,1907.0,0.57,one off
+2025-07,CCR119a,"New Very Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact within 4 hours of referral, Aged 18 and over",2778.0,1437.0,0.52,one off
+2025-07,MHS111b,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective assessment,12671.0,19206.0,1.52,recurring in this calendar month
+2025-07,MHS112,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and any perspective paired score,9458.0,14405.0,1.52,recurring in this calendar month
+2025-07,MHS112b,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective paired score,7555.0,11833.0,1.57,recurring in this calendar month
+2025-07,MHS112d,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a parent-rated perspective paired score,1488.0,2279.0,1.53,recurring in this calendar month
+2025-07,MHS113a,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective paired score that showed measurable improvement,3773.0,5864.0,1.55,recurring in this calendar month
+2025-07,MHS113c,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective paired score that showed measurable deterioration,736.0,1159.0,1.57,one off
+2025-07,MHS113e,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective paired score that showed no measurable change,3046.0,4810.0,1.58,recurring in this calendar month
+2025-07,MHS114e,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a parent-rated perspective paired score that showed no measurable change,803.0,1307.0,1.63,recurring in this calendar month
+2025-07,MHS115e,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a clinician-rated perspective paired score that showed no measurable change,1463.0,2216.0,1.51,one off
+2025-07,MHS148,Number of open referrals with a Presenting Complaint recorded at the end of the reporting period,112721.0,206197.0,1.83,one off
+2025-08,CCR119,New Very Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact within 4 hours of referral,1907.0,3006.0,1.58,one off
+2025-08,CCR119a,"New Very Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact within 4 hours of referral, Aged 18 and over",1437.0,2597.0,1.81,one off
+2025-08,CYP32,Referrals to children and young people's mental health services starting in RP,84576.0,44225.0,0.52,recurring in this calendar month
+2025-08,CYP32a,"Referrals to children and young people's mental health services starting in RP, 0 to 18",81348.0,41682.0,0.51,recurring in this calendar month
+2025-08,MHS110,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts,51770.0,34470.0,0.67,recurring in this calendar month
+2025-08,MHS111,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and any assessment,24135.0,14351.0,0.59,recurring in this calendar month
+2025-08,MHS111b,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective assessment,19206.0,10655.0,0.55,recurring in this calendar month
+2025-08,MHS111d,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a parent-rated perspective assessment,8217.0,5195.0,0.63,one off
+2025-08,MHS112,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and any perspective paired score,14405.0,8063.0,0.56,recurring in this calendar month
+2025-08,MHS112b,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective paired score,11833.0,6168.0,0.52,recurring in this calendar month
+2025-08,MHS112d,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a parent-rated perspective paired score,2279.0,1421.0,0.62,recurring in this calendar month
+2025-08,MHS113a,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective paired score that showed measurable improvement,5864.0,2946.0,0.5,recurring in this calendar month
+2025-08,MHS113c,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective paired score that showed measurable deterioration,1159.0,570.0,0.49,recurring in this calendar month
+2025-08,MHS113e,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective paired score that showed no measurable change,4810.0,2652.0,0.55,recurring in this calendar month
+2025-08,MHS114a,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a parent-rated perspective paired score that showed measurable improvement,616.0,410.0,0.67,one off
+2025-08,MHS114e,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a parent-rated perspective paired score that showed no measurable change,1307.0,799.0,0.61,recurring in this calendar month
+2025-08,MHS148,Number of open referrals with a Presenting Complaint recorded at the end of the reporting period,206197.0,126581.0,0.61,one off
+2025-08,MHS32a,"Referrals starting in RP, aged 0 to 18",121706.0,67202.0,0.55,recurring in this calendar month
+2025-08,MHS32b,"Referrals starting in reporting period, aged 0 to 18, that were self-referrals",7496.0,4939.0,0.66,recurring in this calendar month
+2025-08,MHS38b,"Referrals active at any point in the Reporting Period, with indirect activity in the RP, aged 0 to 18",75509.0,50310.0,0.67,one off
+2025-08,MHS39a,"People with a referral starting in the reporting period, aged 0 to 18",95693.0,52146.0,0.54,recurring in this calendar month
+2025-08,MHS41,"Children and young people with a child protection plan with a referral starting in the reporting period, aged 0 to 18",733.0,451.0,0.62,one off
+2025-08,MHS42,"Young carers with a referral starting in the reporting period, aged 0 to 18",734.0,360.0,0.49,recurring in this calendar month
+2025-08,MHS61a,"First attended contacts for referrals open in the RP, aged 0 to 18",79228.0,51946.0,0.66,one off
+2025-08,MHS69,"The number of children and young people, regardless of when their referral started, receiving at least two contacts (including indirect contacts) and where their first contact occurs before their 18th birthday",53995.0,32606.0,0.6,recurring in this calendar month
+2025-09,CCR118a,"New Very Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact, Aged 18 and over",3086.0,1995.0,0.65,one off
+2025-09,CCR119a,"New Very Urgent Referrals to Crisis Care teams in the reporting period with first face to face contact within 4 hours of referral, Aged 18 and over",2597.0,1492.0,0.57,one off
+2025-09,CYP32,Referrals to children and young people's mental health services starting in RP,44225.0,78243.0,1.77,recurring in this calendar month
+2025-09,CYP32a,"Referrals to children and young people's mental health services starting in RP, 0 to 18",41682.0,75209.0,1.8,recurring in this calendar month
+2025-09,MHS148,Number of open referrals with a Presenting Complaint recorded at the end of the reporting period,126581.0,237410.0,1.88,one off
+2025-09,MHS32a,"Referrals starting in RP, aged 0 to 18",67202.0,112158.0,1.67,recurring in this calendar month
+2025-09,MHS39a,"People with a referral starting in the reporting period, aged 0 to 18",52146.0,87754.0,1.68,recurring in this calendar month
+2025-09,MHS42,"Young carers with a referral starting in the reporting period, aged 0 to 18",360.0,788.0,2.19,recurring in this calendar month
+2026-02,CCR70,New Emergency Referrals to Crisis Care teams in the reporting period,3059.0,1999.0,0.65,one off
+2026-02,CCR70a,"New Emergency Referrals to Crisis Care teams in the reporting period, Aged 18 and over",2662.0,1697.0,0.64,one off
+2026-04,MHS69,"The number of children and young people, regardless of when their referral started, receiving at least two contacts (including indirect contacts) and where their first contact occurs before their 18th birthday",41586.0,131931.0,3.17,recurring in this calendar month
+2026-05,MHS69,"The number of children and young people, regardless of when their referral started, receiving at least two contacts (including indirect contacts) and where their first contact occurs before their 18th birthday",131931.0,78163.0,0.59,recurring in this calendar month
+2026-07,MHS111b,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective assessment,15535.0,23306.0,1.5,recurring in this calendar month
+2026-07,MHS112,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and any perspective paired score,11153.0,17239.0,1.55,recurring in this calendar month
+2026-07,MHS112b,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective paired score,9188.0,14638.0,1.59,recurring in this calendar month
+2026-07,MHS112d,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a parent-rated perspective paired score,1940.0,2935.0,1.51,recurring in this calendar month
+2026-07,MHS113a,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective paired score that showed measurable improvement,4734.0,7799.0,1.65,recurring in this calendar month
+2026-07,MHS113e,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective paired score that showed no measurable change,3566.0,5561.0,1.56,recurring in this calendar month
+2026-07,MHS114e,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a parent-rated perspective paired score that showed no measurable change,1061.0,1728.0,1.63,recurring in this calendar month
+2026-08,CYP32,Referrals to children and young people's mental health services starting in RP,80590.0,46295.0,0.57,recurring in this calendar month
+2026-08,CYP32a,"Referrals to children and young people's mental health services starting in RP, 0 to 18",77680.0,43644.0,0.56,recurring in this calendar month
+2026-08,MHS110,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts,55836.0,37029.0,0.66,recurring in this calendar month
+2026-08,MHS111,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and any assessment,29334.0,18291.0,0.62,recurring in this calendar month
+2026-08,MHS111b,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective assessment,23306.0,13638.0,0.59,recurring in this calendar month
+2026-08,MHS112,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and any perspective paired score,17239.0,9658.0,0.56,recurring in this calendar month
+2026-08,MHS112b,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective paired score,14638.0,7655.0,0.52,recurring in this calendar month
+2026-08,MHS112d,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a parent-rated perspective paired score,2935.0,1845.0,0.63,recurring in this calendar month
+2026-08,MHS113a,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective paired score that showed measurable improvement,7799.0,3867.0,0.5,recurring in this calendar month
+2026-08,MHS113c,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective paired score that showed measurable deterioration,1278.0,740.0,0.58,recurring in this calendar month
+2026-08,MHS113e,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a self-rated perspective paired score that showed no measurable change,5561.0,3048.0,0.55,recurring in this calendar month
+2026-08,MHS114e,Number of closed referrals for children and young people aged between 0 and 17 with at least 2 contacts and a parent-rated perspective paired score that showed no measurable change,1728.0,1049.0,0.61,recurring in this calendar month
+2026-08,MHS32a,"Referrals starting in RP, aged 0 to 18",121655.0,79203.0,0.65,recurring in this calendar month
+2026-08,MHS39a,"People with a referral starting in the reporting period, aged 0 to 18",95238.0,60829.0,0.64,recurring in this calendar month
+2026-08,MHS42,"Young carers with a referral starting in the reporting period, aged 0 to 18",734.0,360.0,0.49,recurring in this calendar month
+2026-08,MHS69,"The number of children and young people, regardless of when their referral started, receiving at least two contacts (including indirect contacts) and where their first contact occurs before their 18th birthday",54672.0,35497.0,0.65,recurring in this calendar month
