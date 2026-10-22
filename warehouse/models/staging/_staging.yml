@@ -1,0 +1,43 @@
+version: 2
+
+models:
+  - name: stg_mhsds__values
+    description: Every published MHSDS value from the preferred file of each month, cleaned and typed
+    columns:
+      - name: release_month
+        data_tests: [not_null]
+      - name: period_start
+        description: Parsed from either date style NHS England has used. Null would mean a new style.
+        data_tests: [not_null]
+      - name: period_end
+        data_tests: [not_null]
+      - name: measure_id
+        data_tests: [not_null]
+      - name: status
+        description: Includes a trailing space in some files before trimming
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["Final", "Performance", "Adhoc", "Provisional"]
+      - name: file_version
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["final", "performance"]
+      - name: geo_level
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["England", "Commissioning Region", "ICB", "Sub ICB", "Local Authority", "Provider"]
+      - name: window_months
+        description: 1 for single month values, 3 and 12 for rolling windows
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [1, 3, 12]
+
+  - name: stg_mhsds__files
+    description: Every collected file and version from the manifest
+    columns:
+      - name: asset_name
+        data_tests: [unique, not_null]

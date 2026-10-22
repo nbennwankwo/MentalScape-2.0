@@ -15,7 +15,7 @@ SUB_ICBS_2026 = {"06Q": "NHS ESSEX ICB - 06Q", "U2G6B": "NHS THAMES VALLEY ICB -
 def _build(write_csv, tmp_path: Path, files: list[Path]) -> dict[str, pd.DataFrame]:
     profiles = tmp_path / "profiles"
     write_tables(profile_many(files), profiles)
-    return build(profiles, tmp_path / "reference", tmp_path / "report.md")
+    return build(profiles, tmp_path / "reference", tmp_path / "report.md", tmp_path / "seeds")
 
 
 def test_detects_added_removed_renamed_and_replaced(write_csv, tmp_path: Path):
@@ -53,6 +53,10 @@ def test_detects_added_removed_renamed_and_replaced(write_csv, tmp_path: Path):
     assert not catalogue.loc["EIP64", "in_latest_release"]
     assert catalogue.loc["MHS01", "name_versions"] == 2
     assert (tmp_path / "report.md").read_text().startswith("# MHSDS Monthly Statistics")
+
+    known = pd.read_csv(tmp_path / "seeds" / "mhsds_known_measures.csv")
+    assert list(known.columns) == ["measure_id", "first_seen", "last_seen"]
+    assert {"MHS200", "EIP64", "CCR72", "CCR118"} <= set(known["measure_id"])
 
 
 def test_recurring_jumps_are_separated_from_one_offs(write_csv, tmp_path: Path):

@@ -1,0 +1,10 @@
+measure_pattern,caveat,source
+MHS148,NHS England estimates this measure is 25 to 30 percent higher than the true value. Not corrected for 2024-25.,NHS England release pages notice of 11 February 2026
+EIP68,Some referrals were counted more than once. Overcount of about 23 percent in March 2025. Corrected from July 2026 data onwards.,NHS England release pages notice of 30 June 2026
+MHS95%,Deprivation based rates were too low in some 2025 Performance releases and were corrected in the End of Year Final files.,NHS England release pages notice of 9 October 2025
+MHS116%,Deprivation based rates were too low in some 2025 Performance releases and were corrected in the End of Year Final files.,NHS England release pages notice of 9 October 2025
+MHS157%,Deprivation based rates were too low in some 2025 Performance releases and were corrected in the End of Year Final files.,NHS England release pages notice of 9 October 2025
+MHS158%,Deprivation based rates were too low in some 2025 Performance releases and were corrected in the End of Year Final files.,NHS England release pages notice of 9 October 2025
+MHS30f,Method changed with MHSDS version 6 in April 2024 and again in May 2025. The England value falls by about two thirds and later roughly triples at those points.,MentalScape change log and NHS England May 2025 release page
+MHS69,Roughly triples every April and then settles. Treat as a financial year pattern rather than a change in services.,MentalScape change log
+ED%,Children's eating disorder methods were updated in April 2026 and the age band moved from 0 to 18 to 0 to 17.,NHS England April 2026 release page

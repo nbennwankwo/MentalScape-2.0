@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: raw
+    description: Exact copies of NHS England files, loaded by mentalscape.warehouse.load
+    schema: raw
+    tables:
+      - name: mhsds_main
+        description: Every row of the preferred main data file for each month, all values as text
+      - name: mhsds_files
+        description: Every collected file from the manifest, with a flag for the one used per month

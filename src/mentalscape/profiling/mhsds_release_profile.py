@@ -56,7 +56,17 @@ EXPECTED_COLUMNS = (
 SUPPRESSION_MARKER = "*"
 
 # Dates have been published as both 01/07/2022 and 2022-07-01 over the years.
-DATE_SQL = "coalesce(try_strptime(trim({col}), '%d/%m/%Y'), try_strptime(trim({col}), '%Y-%m-%d'))"
+# Dates have been published in five styles, 01/07/2022, 1/4/2024, 01/06/24,
+# 2023-06-01 and 01-04-2025. Each is matched exactly so that a two digit year
+# is never read as a year in the first century.
+DATE_SQL = (
+    "CASE "
+    "WHEN regexp_matches(trim({col}), '^[0-9]{{1,2}}/[0-9]{{1,2}}/[0-9]{{4}}$') THEN strptime(trim({col}), '%d/%m/%Y') "
+    "WHEN regexp_matches(trim({col}), '^[0-9]{{1,2}}/[0-9]{{1,2}}/[0-9]{{2}}$') THEN strptime(trim({col}), '%d/%m/%y') "
+    "WHEN regexp_matches(trim({col}), '^[0-9]{{4}}-[0-9]{{1,2}}-[0-9]{{1,2}}$') THEN strptime(trim({col}), '%Y-%m-%d') "
+    "WHEN regexp_matches(trim({col}), '^[0-9]{{1,2}}-[0-9]{{1,2}}-[0-9]{{4}}$') THEN strptime(trim({col}), '%d-%m-%Y') "
+    "END"
+)
 
 
 @dataclass(frozen=True)
@@ -347,3 +357,18 @@ def main(argv: list[str] | None = None) -> None:
 
 if __name__ == "__main__":
     main()
+
+
+def normalise_line_endings(csv_path: Path, work_dir: Path) -> tuple[Path, str]:
+    """Return a path that reads cleanly, plus a description of the original line endings.
+
+    Files with a single style of line ending are returned unchanged. Files that
+    mix Windows and Unix endings, as several End of Year Final files do, are
+    copied with every ending made Unix style.
+    """
+    crlf, total = count_line_endings(csv_path)
+    if crlf == 0:
+        return csv_path, "LF"
+    if crlf == total:
+        return csv_path, "CRLF"
+    return _normalised_copy(csv_path, work_dir), f"mixed ({crlf} of {total} lines CRLF)"

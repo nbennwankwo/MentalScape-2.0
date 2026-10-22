@@ -66,16 +66,16 @@ flowchart LR
 
 **5. Serving.** A small API exposes model outputs. An interactive dashboard lets a planner explore areas, run scenarios and read recommendations. A GenAI analyst answers questions in plain English by writing read only SQL against approved tables and always shows the query and the source release.
 
-## Proposed tools
+## Tools
 
 | Need | Tool | Status |
 |---|---|---|
-| Language | Python 3.12 | proposed |
-| Environment and packaging | uv | proposed |
+| Language | Python 3.12 | in use |
+| Environment and packaging | uv | in use |
 | Local analytics engine | DuckDB | in use |
-| Warehouse | PostgreSQL | proposed |
-| SQL transformations and tests | dbt | proposed |
-| Scheduling | GitHub Actions | proposed |
+| Warehouse | PostgreSQL, with DuckDB for local builds | in use in CI, production from Phase 4 |
+| SQL transformations and tests | dbt | in use |
+| Scheduling | GitHub Actions | in use |
 | Experiment tracking | MLflow | to decide in Phase 2 |
 | Simulation | SimPy | to decide in Phase 3 |
 | API | FastAPI | to decide in Phase 4 |

@@ -45,6 +45,8 @@ STEP_FACTOR = 1.5
 def canonical_geo_level(label: str) -> str:
     """Map the many published geography labels onto five stable levels."""
     text = label.lower()
+    if text == "ethnicity (white british/non-white british)":
+        return "England"
     if "sub icb" in text:
         return "Sub ICB"
     if "icb" in text:
@@ -516,7 +518,9 @@ def render_markdown(outputs: dict[str, pd.DataFrame]) -> str:
     return "\n".join(lines) + "\n"
 
 
-def build(profile_dir: Path, reference_dir: Path, report_path: Path | None = None) -> dict[str, pd.DataFrame]:
+def build(
+    profile_dir: Path, reference_dir: Path, report_path: Path | None = None, seed_dir: Path | None = None
+) -> dict[str, pd.DataFrame]:
     tables = load_profiles(profile_dir)
     months = list(tables["releases"]["release_month"])
     m_events = measure_events(tables["measures"], months)
@@ -537,6 +541,8 @@ def build(profile_dir: Path, reference_dir: Path, report_path: Path | None = Non
     for name, frame in outputs.items():
         frame.to_csv(reference_dir / f"{name}.csv", index=False)
         LOGGER.info("Wrote %s rows to %s", len(frame), reference_dir / f"{name}.csv")
+    if seed_dir is not None:
+        write_known_measures(catalogue, seed_dir)
     if report_path is not None:
         report_path.parent.mkdir(parents=True, exist_ok=True)
         report_path.write_text(render_markdown(outputs), encoding="utf-8")
@@ -544,14 +550,29 @@ def build(profile_dir: Path, reference_dir: Path, report_path: Path | None = Non
     return outputs
 
 
+def write_known_measures(catalogue: pd.DataFrame, seed_dir: Path) -> Path:
+    """Write the measure IDs the change log has seen as a dbt seed.
+
+    The warehouse warns about any measure ID that is not in this list, which
+    is the signal to profile the new release and rebuild the change log.
+    """
+    seed_dir.mkdir(parents=True, exist_ok=True)
+    path = seed_dir / "mhsds_known_measures.csv"
+    known = catalogue[["measure_id", "first_seen", "last_seen"]].sort_values("measure_id")
+    known.to_csv(path, index=False, lineterminator="\n")
+    LOGGER.info("Wrote %s known measures to %s", len(known), path)
+    return path
+
+
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--profiles", type=Path, default=Path("data/interim/profiles"))
     parser.add_argument("--reference", type=Path, default=Path("data/reference"))
     parser.add_argument("--report", type=Path, default=Path("docs/data/mhsds_change_log_detail.md"))
+    parser.add_argument("--seeds", type=Path, default=Path("warehouse/seeds"))
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-    build(args.profiles, args.reference, args.report)
+    build(args.profiles, args.reference, args.report, args.seeds)
 
 
 if __name__ == "__main__":

@@ -14,6 +14,8 @@ The machine readable version of this register is [`config/sources.yaml`](../conf
 
 **Versions.** Each month is first published as *Performance* data. For some years NHS England later reissues an *End of Year Final* version that includes late submissions. Release pages list End of Year Final main data files for every month from July 2022 to March 2026. The legacy copies used by MentalScape 1.0 mix the two, with 2023-24 as Final and 2024-25 as Performance. The pipeline keeps both versions and uses the final one when it exists.
 
+**Status.** Collected automatically since October 2026, with every main data file from July 2022 to August 2026 loaded into the warehouse ([pipeline](data/pipeline.md)).
+
 **Licence.** Open Government Licence v3.0.
 
 **Read next.** The full history of how this publication changed between July 2022 and August 2026 is in [data/mhsds_change_log.md](data/mhsds_change_log.md).

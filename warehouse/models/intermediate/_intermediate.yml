@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: int_geo__sub_icb_monthly
+    description: The ICB each Sub ICB belonged to in each release month
+    columns:
+      - name: icb_source
+        description: How the ICB was found. Carried forward is used for the March 2026 final file.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["matched by name", "carried forward from previous month", "unmatched"]

@@ -1,0 +1,39 @@
+# MentalScape 2.0 warehouse. Runs on DuckDB locally and PostgreSQL in CI (docs/adr/0010).
+name: mentalscape
+version: "0.1.0"
+config-version: 2
+profile: mentalscape
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages", "logs"]
+
+flags:
+  send_anonymous_usage_stats: false
+
+vars:
+  # Every release since July 2022 has 106 Sub ICBs. Fixtures override this.
+  min_sub_icbs_per_release: 100
+
+models:
+  mentalscape:
+    staging:
+      +materialized: view
+      +schema: staging
+    intermediate:
+      +materialized: view
+      +schema: intermediate
+    marts:
+      +materialized: table
+      +schema: marts
+
+seeds:
+  mentalscape:
+    +schema: reference
+
+data_tests:
+  mentalscape:
+    +store_failures: false
