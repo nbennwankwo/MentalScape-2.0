@@ -82,7 +82,7 @@ jobs:
         run: |
           if ! gh release view "$RELEASE_TAG" > /dev/null 2>&1; then
             gh release create "$RELEASE_TAG" --title "MHSDS Monthly raw files" \
-              --notes-file .github/data-release-notes.md --latest=false
+              --notes-file .github/release-notes/data-mhsds-monthly.md --latest=false
           fi
           if [ -s "$OUT_DIR/new_assets.txt" ]; then
             sed "s|^|$OUT_DIR/assets/|" "$OUT_DIR/new_assets.txt" | xargs -d '\n' -n 20 gh release upload "$RELEASE_TAG" --clobber

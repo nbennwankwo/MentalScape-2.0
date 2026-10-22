@@ -1,0 +1,104 @@
+name: Ingest reference files
+
+# Collects the files listed under reference_files in config/sources.yaml, such
+# as the Indices of Deprivation, ONS population estimates and ONS geography
+# lookups, and stores them on the data-reference release (docs/adr/0012).
+#   push to main       runs when the source register changes
+#   schedule           every Monday. Only files not yet collected are downloaded.
+#   workflow_dispatch  run by hand
+#   pull_request       a trial run that publishes to the data-staging release only
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "config/sources.yaml"
+  schedule:
+    - cron: "23 7 * * 1"
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "src/mentalscape/ingest/reference.py"
+      - "src/mentalscape/ingest/manifest.py"
+      - "config/sources.yaml"
+      - ".github/workflows/ingest-reference.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ingest-reference-${{ github.event_name == 'pull_request' && 'trial' || 'main' }}
+  cancel-in-progress: false
+
+env:
+  RELEASE_TAG: data-reference
+  STAGING_TAG: data-staging
+  OUT_DIR: data/interim/reference
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      GH_TOKEN: ${{ github.token }}
+      EVENT_NAME: ${{ github.event_name }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+
+      - name: Install
+        run: |
+          uv python install 3.12
+          uv sync
+
+      - name: Fetch the current manifest
+        run: |
+          mkdir -p "$OUT_DIR/existing"
+          if [ "$EVENT_NAME" != "pull_request" ]; then
+            gh release download "$RELEASE_TAG" --pattern manifest.csv --dir "$OUT_DIR/existing" --clobber \
+              || echo "No data release yet, starting a new manifest"
+          fi
+
+      - name: Collect new files
+        id: collect
+        run: |
+          args=(collect --out-dir "$OUT_DIR")
+          if [ -f "$OUT_DIR/existing/manifest.csv" ]; then args+=(--manifest "$OUT_DIR/existing/manifest.csv"); fi
+          status=0
+          uv run python -m mentalscape.ingest.reference "${args[@]}" || status=$?
+          cat "$OUT_DIR/summary.md" >> "$GITHUB_STEP_SUMMARY"
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+
+      - name: Publish to the data release
+        if: github.event_name != 'pull_request'
+        run: |
+          if ! gh release view "$RELEASE_TAG" > /dev/null 2>&1; then
+            gh release create "$RELEASE_TAG" --title "Reference files" \
+              --notes-file .github/release-notes/data-reference.md --latest=false
+          fi
+          if [ -s "$OUT_DIR/new_assets.txt" ]; then
+            sed "s|^|$OUT_DIR/assets/|" "$OUT_DIR/new_assets.txt" | xargs -d '\n' -n 20 gh release upload "$RELEASE_TAG" --clobber
+          fi
+          gh release upload "$RELEASE_TAG" "$OUT_DIR/manifest.csv" --clobber
+
+      - name: Publish the trial files to the staging release
+        if: github.event_name == 'pull_request'
+        run: |
+          if ! gh release view "$STAGING_TAG" > /dev/null 2>&1; then
+            gh release create "$STAGING_TAG" --title "Trial files from pull requests" \
+              --notes-file .github/release-notes/data-staging.md --prerelease --latest=false
+          fi
+          if [ -s "$OUT_DIR/new_assets.txt" ]; then
+            sed "s|^|$OUT_DIR/assets/|" "$OUT_DIR/new_assets.txt" | xargs -d '\n' -n 20 gh release upload "$STAGING_TAG" --clobber
+          fi
+          cp "$OUT_DIR/manifest.csv" "$OUT_DIR/reference_manifest.csv"
+          gh release upload "$STAGING_TAG" "$OUT_DIR/reference_manifest.csv" --clobber
+
+      - name: Fail if any file could not be collected
+        if: steps.collect.outputs.status != '0'
+        run: |
+          echo "Some reference files could not be collected. See the job summary."
+          exit 1

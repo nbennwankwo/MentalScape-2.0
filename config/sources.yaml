@@ -21,10 +21,18 @@ sources:
   talking_therapies_monthly:
     title: NHS Talking Therapies for anxiety and depression, monthly statistics
     publisher: NHS England
-    series_page: null
+    # Renamed from IAPT in May 2023. Releases before then are on the second page.
+    series_page: https://digital.nhs.uk/data-and-information/publications/statistical/nhs-talking-therapies-monthly-statistics-including-employment-advisors
+    earlier_series_page: https://digital.nhs.uk/data-and-information/publications/statistical/psychological-therapies-report-on-the-use-of-iapt-services
     cadence: monthly
+    first_month_in_scope: "2022-07"
+    # Kinds and versions are the labels produced by mentalscape.ingest.talking_therapies.
+    kinds_wanted: [activity, dq]
+    versions_wanted: [final, performance]
+    version_rule: prefer Final over Performance, never use Provisional or Primary
+    raw_store: GitHub Release data-talking-therapies-monthly (see docs/adr/0009)
     licence: Open Government Licence v3.0
-    status: legacy copies exist for July 2022 to June 2025, to automate in Phase 1
+    status: automated in Phase 1
 
   indices_of_deprivation_2025:
     title: English Indices of Deprivation 2025
@@ -33,33 +41,120 @@ sources:
     geography: LSOA 2021, 33755 areas
     published: "2025-10-30"
     licence: Open Government Licence v3.0
-    status: to load in Phase 1
+    raw_store: GitHub Release data-reference (see reference_files below)
+    status: automated in Phase 1
     caution: not a time series against IoD 2019, use as a snapshot
 
   ons_population_estimates:
-    title: Mid year population estimates by age and sex
+    title: Lower layer Super Output Area mid year population estimates by single year of age and sex
     publisher: Office for National Statistics
-    series_page: null
+    series_page: https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/lowersuperoutputareamidyearpopulationestimates
     licence: Open Government Licence v3.0
-    status: to load in Phase 1
-    caution: estimates on the April 2026 ICB boundaries are due from ONS in autumn 2026
+    raw_store: GitHub Release data-reference (see reference_files below)
+    status: automated in Phase 1
+    caution: ONS estimates on the April 2026 ICB boundaries were not yet published, so the warehouse builds them from LSOA estimates with the ONS best fit lookup
 
   ons_geography_lookups:
-    title: LSOA 2021 to Sub ICB, ICB and region lookups, including April 2026 boundaries
+    title: LSOA to Sub ICB, ICB and local authority lookups, and the April 2023 local authority changes
     publisher: Office for National Statistics Open Geography Portal
-    series_page: null
-    licence: Open Government Licence v3.0
-    status: to load in Phase 1
+    series_page: https://geoportal.statistics.gov.uk/
+    licence: Open Government Licence v3.0, contains OS data, Crown copyright and database right
+    raw_store: GitHub Release data-reference (see reference_files below)
+    status: automated in Phase 1
 
   nhs_workforce:
     title: NHS Workforce Statistics, mental health staff groups
     publisher: NHS England
     series_page: null
     licence: Open Government Licence v3.0
-    status: legacy copies exist, to automate in Phase 1
+    status: legacy copies exist, to automate in Phase 3 with the simulation that needs it
 
   mhsds_patient_level:
     title: Mental Health Services Data Set, pseudonymised record level
     publisher: NHS England via the Data Access Request Service
     licence: data sharing agreement required
     status: enquiry sent October 2026, not available
+
+# Files at fixed addresses, collected by mentalscape.ingest.reference into the
+# data-reference release. A new edition gets a new entry with a new id, so old
+# builds stay repeatable. header_contains guards against an error page being
+# saved in place of the data.
+reference_files:
+  iod_2025_file7:
+    source: indices_of_deprivation_2025
+    title: "File 7: All ranks, scores, deciles and population denominators for the Indices of Deprivation"
+    edition: "2025-10"
+    url: https://assets.publishing.service.gov.uk/media/691ded56d140bbbaa59a2a7d/File_7_IoD2025_All_Ranks_Scores_Deciles_Population_Denominators.csv
+    filename: File_7_IoD2025_All_Ranks_Scores_Deciles_Population_Denominators.csv
+    header_contains: LSOA code (2021)
+
+  ons_lsoa_population_2022_2024:
+    source: ons_population_estimates
+    title: "Lower layer Super Output Area population estimates, mid-2022 revised (Nov 2025) to mid-2024"
+    edition: "2025-11"
+    url: https://www.ons.gov.uk/file?uri=/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/lowersuperoutputareamidyearpopulationestimates/mid2022revisednov2025tomid2024/sapelsoasyoa20222024.xlsx
+    filename: sapelsoasyoa20222024.xlsx
+
+  lsoa11_sicbl_icb_lad_2022:
+    source: ons_geography_lookups
+    title: LSOA (2011) to SICBL to Integrated Care Boards to LAD (July 2022) Lookup in EN
+    edition: "2022-07"
+    url: https://open-geography-portalx-ons.hub.arcgis.com/api/download/v1/items/423c8069710c4d488d5ff99475688101/csv?layers=0
+    filename: lsoa11_sicbl22_icb22_lad22.csv
+    header_contains: SICBL22CD
+
+  lsoa21_sicbl_icb_lad_2023:
+    source: ons_geography_lookups
+    title: LSOA (2021) to SICBL to ICB to LAD (April 2023) Lookup in EN
+    edition: "2023-04"
+    url: https://open-geography-portalx-ons.hub.arcgis.com/api/download/v1/items/8905a9ad35284b78945c3f3eb30498a2/csv?layers=0
+    filename: lsoa21_sicbl23_icb23_lad23.csv
+    header_contains: SICBL23CD
+
+  lsoa21_sicbl_icb_lad_2024:
+    source: ons_geography_lookups
+    title: LSOA (2021) to SICBL to ICB to Cancer Alliances to LAD (April 2024) Lookup in EN
+    edition: "2024-04"
+    url: https://open-geography-portalx-ons.hub.arcgis.com/api/download/v1/items/27d32e68e05a4c848276330903bb18fc/csv?layers=0
+    filename: lsoa21_sicbl24_icb24_lad24.csv
+    header_contains: SICBL24CD
+
+  lsoa21_sicbl_icb_lad_2025:
+    source: ons_geography_lookups
+    title: LSOA (2021) to SICBL to ICB to Cancer Alliances to LAD (April 2025) Lookup in EN
+    edition: "2025-04"
+    url: https://open-geography-portalx-ons.hub.arcgis.com/api/download/v1/items/d3822450044541edbcb4369d6e83948a/csv?layers=0
+    filename: lsoa21_sicbl25_icb25_lad25.csv
+    header_contains: SICBL25CD
+
+  lsoa21_sicbl_icb_lad_2026:
+    source: ons_geography_lookups
+    title: LSOA (2021) to SICBL to ICB to NHSER to LAD (April 2026) Lookup in EN
+    edition: "2026-04"
+    url: https://open-geography-portalx-ons.hub.arcgis.com/api/download/v1/items/bebf631bb1ac40cf9ec7dc060897ca99/csv?layers=0
+    filename: lsoa21_sicbl26_icb26_lad26.csv
+    header_contains: SICBL26CD
+
+  lad22_lad23:
+    source: ons_geography_lookups
+    title: Local Authority District (2022) to Local Authority District (2023) Lookup in the UK
+    edition: "2023-04"
+    url: https://open-geography-portalx-ons.hub.arcgis.com/api/download/v1/items/32e1e25b27d7472da86a250c5f0c2d2d/csv?layers=0
+    filename: lad22_lad23.csv
+    header_contains: LAD22CD
+
+  lad22_cty22:
+    source: ons_geography_lookups
+    title: Local Authority District to County (December 2022) Lookup in EN
+    edition: "2022-12"
+    url: https://open-geography-portalx-ons.hub.arcgis.com/api/download/v1/items/332bba77e8944aee835457214bc2ccf8/csv?layers=0
+    filename: lad22_cty22.csv
+    header_contains: CTY22CD
+
+  lad23_cty23:
+    source: ons_geography_lookups
+    title: Local Authority District to County (April 2023) Lookup in EN
+    edition: "2023-04"
+    url: https://open-geography-portalx-ons.hub.arcgis.com/api/download/v1/items/561603518d6b42be9362b747e9b16175/csv?layers=0
+    filename: lad23_cty23.csv
+    header_contains: CTY23CD
