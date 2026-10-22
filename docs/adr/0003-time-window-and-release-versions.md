@@ -1,6 +1,6 @@
 # ADR 0003 Start in July 2022 and prefer End of Year Final releases
 
-- **Status** Proposed
+- **Status** Accepted (Kemi, 22 October 2026)
 - **Date** 2026-10-13
 
 ## Context
@@ -23,3 +23,7 @@ The Phase 0 change log also showed that NHS England publishes some months twice.
 ## Consequences
 
 About four years of monthly data, which is enough for seasonal models but short for long term trends. Every value can be traced to the exact file and version it came from.
+
+## Note added 22 October 2026
+
+A full scan of every release page from 2022 onwards, done at the start of Phase 1, found that NHS England has published an End of Year Final main data file for every month from July 2022 to March 2026, not just for some years. The decision is unchanged. In practice, staging uses the final version for every month up to March 2026, and the Performance version for later months until their final version appears.

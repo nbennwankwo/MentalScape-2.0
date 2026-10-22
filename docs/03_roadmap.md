@@ -23,13 +23,13 @@ The timeline assumes about 10 to 15 hours a week. Dates are targets, not promise
 
 ## Phase 1, data engineering (weeks 2 to 4)
 
-- Automated discovery and download of every MHSDS monthly release, including End of Year Final reissues, on GitHub Actions
-- Checksummed manifest of every file and version
-- PostgreSQL warehouse with raw, staging and mart layers built in dbt
-- Geography harmonisation across the April 2023 local authority changes and the April 2026 ICB mergers
-- Release version handling, preferring End of Year Final over Performance where both exist
-- Data tests driven by the change log findings
-- Talking Therapies, Indices of Deprivation 2025 and ONS population loaded
+- [x] Discovery of every MHSDS monthly release from a browser, and automated download on GitHub Actions, including End of Year Final reissues ([pipeline](data/pipeline.md), [ADR 0011](adr/0011-split-discovery-from-collection.md))
+- [x] Checksummed manifest of every file and version, stored with the raw files as GitHub Release assets ([ADR 0009](adr/0009-raw-files-in-github-release-assets.md))
+- [ ] PostgreSQL warehouse with raw, staging and mart layers built in dbt, also runnable on DuckDB locally ([ADR 0010](adr/0010-duckdb-locally-postgresql-in-ci.md))
+- [ ] Geography harmonisation across the April 2023 local authority changes and the April 2026 ICB mergers
+- [ ] Release version handling, preferring End of Year Final over Performance where both exist
+- [ ] Data tests driven by the change log findings
+- [ ] Talking Therapies, Indices of Deprivation 2025 and ONS population loaded
 
 **Visible result** one command, or one scheduled job, rebuilds the whole warehouse from source.
 

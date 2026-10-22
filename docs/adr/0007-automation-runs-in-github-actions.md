@@ -1,6 +1,6 @@
 # ADR 0007 Scheduled automation runs on GitHub Actions
 
-- **Status** Proposed
+- **Status** Accepted (Kemi, 22 October 2026)
 - **Date** 2026-10-13
 
 ## Context

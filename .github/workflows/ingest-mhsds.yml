@@ -1,0 +1,101 @@
+name: Ingest MHSDS
+
+# Collects the MHSDS Monthly Statistics files listed in the committed catalogue
+# and stores them on the data-mhsds-monthly release (docs/adr/0009, 0011).
+#   push to main       runs when the catalogue changes
+#   schedule           every Friday, also checks the catalogue is not stale
+#   workflow_dispatch  run by hand, optionally with a limit on new downloads
+#   pull_request       a trial run that downloads two files and publishes nothing
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "data/reference/mhsds_catalogue.csv"
+  schedule:
+    - cron: "17 6 * * 5"
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "Download at most this many new files (leave blank for all)"
+        required: false
+        default: ""
+  pull_request:
+    paths:
+      - "src/mentalscape/ingest/**"
+      - "data/reference/mhsds_catalogue.csv"
+      - "config/sources.yaml"
+      - ".github/workflows/ingest-mhsds.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ingest-mhsds
+  cancel-in-progress: false
+
+env:
+  RELEASE_TAG: data-mhsds-monthly
+  OUT_DIR: data/interim/ingest
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+
+      - name: Install
+        run: |
+          uv python install 3.12
+          uv sync
+
+      - name: Check the catalogue is up to date
+        run: uv run python -m mentalscape.ingest.mhsds check
+
+      - name: Fetch the current manifest
+        run: |
+          mkdir -p "$OUT_DIR/existing"
+          gh release download "$RELEASE_TAG" --pattern manifest.csv --dir "$OUT_DIR/existing" --clobber \
+            || echo "No data release yet, starting a new manifest"
+
+      - name: Collect new files
+        env:
+          INPUT_LIMIT: ${{ inputs.limit }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          args=(collect --out-dir "$OUT_DIR")
+          if [ -f "$OUT_DIR/existing/manifest.csv" ]; then args+=(--manifest "$OUT_DIR/existing/manifest.csv"); fi
+          if [ "$EVENT_NAME" = "pull_request" ]; then args+=(--limit 2); fi
+          if [ -n "$INPUT_LIMIT" ]; then args+=(--limit "$INPUT_LIMIT"); fi
+          uv run python -m mentalscape.ingest.mhsds "${args[@]}"
+          cat "$OUT_DIR/summary.md" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Publish to the data release
+        if: github.event_name != 'pull_request'
+        run: |
+          if ! gh release view "$RELEASE_TAG" > /dev/null 2>&1; then
+            gh release create "$RELEASE_TAG" --title "MHSDS Monthly raw files" \
+              --notes-file .github/data-release-notes.md --latest=false
+          fi
+          if [ -s "$OUT_DIR/new_assets.txt" ]; then
+            sed "s|^|$OUT_DIR/assets/|" "$OUT_DIR/new_assets.txt" | xargs -d '\n' -n 20 gh release upload "$RELEASE_TAG" --clobber
+          fi
+          cp data/reference/mhsds_catalogue.csv "$OUT_DIR/catalogue.csv"
+          gh release upload "$RELEASE_TAG" "$OUT_DIR/manifest.csv" "$OUT_DIR/catalogue.csv" --clobber
+
+      - name: Keep the trial run outputs
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ingest-trial-run
+          path: |
+            ${{ env.OUT_DIR }}/manifest.csv
+            ${{ env.OUT_DIR }}/summary.md
+          retention-days: 14
