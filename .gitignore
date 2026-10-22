@@ -12,6 +12,7 @@ data/warehouse/
 warehouse/target/
 warehouse/logs/
 warehouse/dbt_packages/
+warehouse/.user.yml
 *.parquet
 *.duckdb
 *.duckdb.wal

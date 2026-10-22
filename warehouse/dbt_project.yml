@@ -11,6 +11,9 @@ test-paths: ["tests"]
 target-path: "target"
 clean-targets: ["target", "dbt_packages", "logs"]
 
+flags:
+  send_anonymous_usage_stats: false
+
 vars:
   # Every release since July 2022 has 106 Sub ICBs. Fixtures override this.
   min_sub_icbs_per_release: 100
