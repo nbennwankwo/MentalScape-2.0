@@ -12,7 +12,7 @@ The machine readable version of this register is [`config/sources.yaml`](../conf
 
 **What it cannot tell us.** NHS England states that the data are known to be incomplete. Differences between areas or over time may come from real differences in illness or services, or from differences in data completeness. Small numbers are suppressed with an asterisk. In the August 2026 release about four in five published values are suppressed, mostly at provider level.
 
-**Versions.** Each month is first published as *Performance* data. For some years NHS England later reissues an *End of Year Final* version that includes late submissions. Release pages list End of Year Final main data files for at least 2023-24, 2024-25 and 2025-26. The legacy copies used by MentalScape 1.0 mix the two, with 2023-24 as Final and 2024-25 as Performance. The pipeline keeps both versions and uses the final one when it exists.
+**Versions.** Each month is first published as *Performance* data. For some years NHS England later reissues an *End of Year Final* version that includes late submissions. Release pages list End of Year Final main data files for every month from July 2022 to March 2026. The legacy copies used by MentalScape 1.0 mix the two, with 2023-24 as Final and 2024-25 as Performance. The pipeline keeps both versions and uses the final one when it exists.
 
 **Licence.** Open Government Licence v3.0.
 

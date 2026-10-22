@@ -1,6 +1,6 @@
 # ADR 0002 Use a SQL warehouse built with PostgreSQL and dbt
 
-- **Status** Accepted in principle (use SQL, decided by Kemi). Tool choice proposed.
+- **Status** Accepted (Kemi, 22 October 2026). Extended by ADR 0010.
 - **Date** 2026-10-13
 
 ## Context

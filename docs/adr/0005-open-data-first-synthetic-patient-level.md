@@ -1,6 +1,6 @@
 # ADR 0005 Build on open data first, with a clearly labelled synthetic patient level layer
 
-- **Status** Proposed
+- **Status** Accepted (Kemi, 22 October 2026)
 - **Date** 2026-10-13
 
 ## Context

@@ -10,17 +10,13 @@ sources:
     release_page_pattern: "{series_page}/performance-{month_name}-{year}"
     cadence: monthly
     first_month_in_scope: "2022-07"
-    files_wanted:
-      - main data file
-      - out of area placements
-      - referral spells
-      - restrictive interventions
-      - data coverage file
-      - data quality VODIM and integrity file
-    versions: [Performance, End of Year Final]
+    # Kinds and versions are the labels produced by mentalscape.ingest.classify.
+    kinds_wanted: [main, oaps, referral_spells, dq_coverage, dq_vodim]
+    versions_wanted: [final, performance]
     version_rule: prefer End of Year Final when it exists, keep both in raw
+    raw_store: GitHub Release data-mhsds-monthly (see docs/adr/0009)
     licence: Open Government Licence v3.0
-    status: profiled in Phase 0
+    status: automated in Phase 1
 
   talking_therapies_monthly:
     title: NHS Talking Therapies for anxiety and depression, monthly statistics
