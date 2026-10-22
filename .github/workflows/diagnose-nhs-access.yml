@@ -1,0 +1,33 @@
+name: Diagnose NHS access (temporary)
+
+# Temporary check of which NHS England hosts a GitHub runner can reach.
+# Uses honest, non browser user agents only. Delete once ingest access is settled.
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/diagnose-nhs-access.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe hosts
+        run: |
+          UA_PROJECT="MentalScape-2.0 open data pipeline (+https://github.com/nbennwankwo/MentalScape-2.0)"
+          probe () {
+            echo "=== $1 | user agent: $2"
+            curl -sS -o /tmp/body -D /tmp/headers -A "$2" -w "status %{http_code} ip %{remote_ip}\n" "$1" || true
+            grep -i -E "^(server|x-cache|cf-ray|x-azure-ref|x-akamai|via|content-type):" /tmp/headers || true
+            head -c 300 /tmp/body | tr '\n' ' '; echo; echo
+          }
+          SERIES="https://digital.nhs.uk/data-and-information/publications/statistical/mental-health-services-monthly-statistics"
+          FILE="https://files.digital.nhs.uk/96/DCFDF2/DQ_coverage_JulPerf_2026.csv"
+          for url in "$SERIES" "https://digital.nhs.uk/robots.txt" "https://digital.nhs.uk/sitemap-combined.xml" "$FILE"; do
+            probe "$url" "$UA_PROJECT"
+            probe "$url" "curl/8"
+          done
+          echo "Runner public IP $(curl -s https://api.ipify.org)"
