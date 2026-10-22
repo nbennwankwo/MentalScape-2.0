@@ -38,6 +38,9 @@ concurrency:
   cancel-in-progress: false
 
 env:
+  # Months a pull request trial collects. Set to all for a one off full trial
+  # before a change that depends on every file, then set it back.
+  TRIAL_MONTHS: all
   RELEASE_TAG: data-talking-therapies-monthly
   STAGING_TAG: data-staging
   OUT_DIR: data/interim/ingest
@@ -78,7 +81,7 @@ jobs:
         run: |
           args=(collect --out-dir "$OUT_DIR")
           if [ -f "$OUT_DIR/existing/manifest.csv" ]; then args+=(--manifest "$OUT_DIR/existing/manifest.csv"); fi
-          if [ "$EVENT_NAME" = "pull_request" ]; then args+=(--months 2022-07,2023-01,2026-08); fi
+          if [ "$EVENT_NAME" = "pull_request" ] && [ "$TRIAL_MONTHS" != "all" ]; then args+=(--months "$TRIAL_MONTHS"); fi
           if [ -n "$INPUT_LIMIT" ]; then args+=(--limit "$INPUT_LIMIT"); fi
           uv run python -m mentalscape.ingest.talking_therapies "${args[@]}"
           cat "$OUT_DIR/summary.md" >> "$GITHUB_STEP_SUMMARY"
