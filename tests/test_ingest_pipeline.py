@@ -179,3 +179,45 @@ def test_collect_new_respects_limit(tmp_path: Path, limit: int):
     ]
     new = mhsds.collect_new(FakeSession(), catalogue, [], tmp_path / "assets", limit=limit, delay=0)
     assert len(new) == limit
+
+
+def test_check_catalogue_flags_a_stale_catalogue():
+    from datetime import date
+
+    fresh = [_entry(reporting_month="2026-08")]
+    ok, message = mhsds.check_catalogue(fresh, date(2026, 10, 22))
+    assert ok and "2026-08" in message
+    ok, message = mhsds.check_catalogue(fresh, date(2027, 2, 1))
+    assert not ok and "Refresh the catalogue" in message
+    assert mhsds.check_catalogue([], date(2026, 10, 22))[0] is False
+
+
+def test_cards_from_browser_json_become_a_catalogue(tmp_path: Path):
+    import json
+
+    card = {
+        "page_url": "https://digital.nhs.uk/x/performance-july-2026",
+        "page_title": "Mental Health Services Monthly Statistics, Performance July 2026",
+        "card_title": "MHSDS Monthly: Performance June Data Quality VODIM and Integrity File",
+        "source_url": "https://files.digital.nhs.uk/12/C3904E/DQ_vodim_JulPerf_2026.csv",
+        "original_filename": "DQ_vodim_JulPerf_2026.csv",
+        "file_type": "csv",
+        "size_text": "13 MB",
+    }
+    path = tmp_path / "cards.json"
+    path.write_text(json.dumps({"collected_at_utc": "t", "pages": 1, "cards": [card, card]}))
+    catalogue = mhsds.cards_to_catalogue(mhsds.cards_from_json(path), CONFIG)
+    assert len(catalogue) == 1  # repeated file is listed once
+    entry = catalogue[0]
+    assert (entry.kind, entry.reporting_month, entry.wanted) == ("dq_vodim", "2026-07", True)
+    assert entry.note.startswith("card title says 2026-06")
+
+
+def test_catalogue_round_trip(tmp_path: Path):
+    from mentalscape.ingest.manifest import read_catalogue, write_catalogue
+
+    rows = [_entry(), _entry(source_url="https://files.digital.nhs.uk/b.csv", wanted=False, reason="r", note="n")]
+    write_catalogue(rows, tmp_path / "catalogue.csv")
+    assert sorted(read_catalogue(tmp_path / "catalogue.csv"), key=lambda r: r.source_url) == sorted(
+        rows, key=lambda r: r.source_url
+    )

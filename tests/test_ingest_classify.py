@@ -198,3 +198,31 @@ def test_vodim_word_is_not_read_as_a_revision():
 
 def test_title_without_month_has_no_reporting_month():
     assert classify("Pre-Release Access List").reporting_month is None
+
+
+def test_card_title_typo_is_corrected_from_page_and_file_name():
+    found = classify(
+        "MHSDS Monthly: End of Year Final March 2025 Out of Area Placements",
+        "MHSDS Data_OAPs_MarFinal_2026.zip",
+        "Mental Health Services Monthly Statistics, Performance March 2026",
+    )
+    assert found.reporting_month == "2026-03"
+    assert found.note == "card title says 2025-03, page and file name say 2026-03"
+
+
+def test_month_without_year_typo_is_corrected():
+    found = classify(
+        "MHSDS Monthly: Performance June Data Quality VODIM and Integrity File",
+        "DQ_vodim_JulPerf_2026.csv",
+        "Mental Health Services Monthly Statistics, Performance July 2026",
+    )
+    assert (found.reporting_month, found.note != "") == ("2026-07", True)
+
+
+def test_correct_titles_are_left_alone():
+    found = classify(
+        "MHSDS Monthly: End of Year Final March 2025 Out of Area Placements",
+        "MHSDS Data_OAPs_MarFinal_2025.zip",
+        "Mental Health Services Monthly Statistics, Performance March 2025",
+    )
+    assert (found.reporting_month, found.note) == ("2025-03", "")

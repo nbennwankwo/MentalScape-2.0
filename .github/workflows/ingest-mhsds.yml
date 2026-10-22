@@ -1,12 +1,17 @@
 name: Ingest MHSDS
 
-# Collects MHSDS Monthly Statistics files from NHS England and stores them as
-# assets on the data-mhsds-monthly release (docs/adr/0009).
-#   schedule           every Friday morning, to catch new releases and reissues
+# Collects the MHSDS Monthly Statistics files listed in the committed catalogue
+# and stores them on the data-mhsds-monthly release (docs/adr/0009, 0011).
+#   push to main       runs when the catalogue changes
+#   schedule           every Friday, also checks the catalogue is not stale
 #   workflow_dispatch  run by hand, optionally with a limit on new downloads
 #   pull_request       a trial run that downloads two files and publishes nothing
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "data/reference/mhsds_catalogue.csv"
   schedule:
     - cron: "17 6 * * 5"
   workflow_dispatch:
@@ -18,6 +23,7 @@ on:
   pull_request:
     paths:
       - "src/mentalscape/ingest/**"
+      - "data/reference/mhsds_catalogue.csv"
       - "config/sources.yaml"
       - ".github/workflows/ingest-mhsds.yml"
 
@@ -50,18 +56,21 @@ jobs:
           uv python install 3.12
           uv sync
 
+      - name: Check the catalogue is up to date
+        run: uv run python -m mentalscape.ingest.mhsds check
+
       - name: Fetch the current manifest
         run: |
           mkdir -p "$OUT_DIR/existing"
           gh release download "$RELEASE_TAG" --pattern manifest.csv --dir "$OUT_DIR/existing" --clobber \
             || echo "No data release yet, starting a new manifest"
 
-      - name: Discover and collect
+      - name: Collect new files
         env:
           INPUT_LIMIT: ${{ inputs.limit }}
           EVENT_NAME: ${{ github.event_name }}
         run: |
-          args=(run --out-dir "$OUT_DIR")
+          args=(collect --out-dir "$OUT_DIR")
           if [ -f "$OUT_DIR/existing/manifest.csv" ]; then args+=(--manifest "$OUT_DIR/existing/manifest.csv"); fi
           if [ "$EVENT_NAME" = "pull_request" ]; then args+=(--limit 2); fi
           if [ -n "$INPUT_LIMIT" ]; then args+=(--limit "$INPUT_LIMIT"); fi
@@ -78,6 +87,7 @@ jobs:
           if [ -s "$OUT_DIR/new_assets.txt" ]; then
             sed "s|^|$OUT_DIR/assets/|" "$OUT_DIR/new_assets.txt" | xargs -d '\n' -n 20 gh release upload "$RELEASE_TAG" --clobber
           fi
+          cp data/reference/mhsds_catalogue.csv "$OUT_DIR/catalogue.csv"
           gh release upload "$RELEASE_TAG" "$OUT_DIR/manifest.csv" "$OUT_DIR/catalogue.csv" --clobber
 
       - name: Keep the trial run outputs
@@ -86,7 +96,6 @@ jobs:
         with:
           name: ingest-trial-run
           path: |
-            ${{ env.OUT_DIR }}/catalogue.csv
             ${{ env.OUT_DIR }}/manifest.csv
             ${{ env.OUT_DIR }}/summary.md
           retention-days: 14

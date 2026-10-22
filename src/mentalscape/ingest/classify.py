@@ -83,6 +83,7 @@ class Classification:
     version: str
     reporting_month: str | None
     revision: int
+    note: str = ""
 
 
 def classify_kind(title: str) -> str:
@@ -129,12 +130,69 @@ def classify_revision(title: str, filename: str = "") -> int:
     return 1
 
 
+# File names such as "MHSDS Data_JulPerf_2026.zip" or "MHSDS Data_OAPs_MarFinal_2026.zip".
+FILE_MONTH_RE = re.compile(
+    r"(?<![A-Za-z])(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*[ _]?"
+    r"(?:Perf|Prf|Final|EOY_F|P|F)?[ _]*(20\d{2}|\d{2})(?!\d)",
+    re.IGNORECASE,
+)
+
+
+def filename_month(filename: str) -> str | None:
+    match = FILE_MONTH_RE.search(filename)
+    if not match:
+        return None
+    year = int(match.group(2))
+    year = year + 2000 if year < 100 else year
+    return f"{year:04d}-{MONTH_NUMBER_SHORT[match.group(1).lower()]:02d}"
+
+
+MONTH_NUMBER_SHORT = {name[:3].lower(): number for name, number in MONTH_NUMBER.items()}
+
+
+def page_months(page_title: str) -> set[str]:
+    """Every month a release page title names, with years filled in from the title."""
+    months = set()
+    for name, year in MONTH_RE.findall(page_title):
+        year_number = int(year) if year else _page_year_for(name, page_title)
+        if year_number:
+            months.add(f"{year_number:04d}-{MONTH_NUMBER[name.lower()]:02d}")
+    return months
+
+
+@dataclass(frozen=True)
+class MonthDecision:
+    month: str | None
+    note: str
+
+
+def decide_month(title: str, kind: str, filename: str, page_title: str) -> MonthDecision:
+    """Use the card title's month unless the page and the file name both contradict it.
+
+    NHS England's card titles occasionally carry a typo. The March 2026 page,
+    for example, lists "End of Year Final March 2025 Out of Area Placements"
+    for the file MHSDS Data_OAPs_MarFinal_2026.zip. When the page title and the
+    file name agree with each other and not with the card title, they win and
+    a note records the correction.
+    """
+    from_title = classify_month(title, kind, page_title)
+    if kind in RANGE_KINDS or from_title is None:
+        return MonthDecision(from_title, "")
+    from_file = filename_month(filename)
+    on_page = page_months(page_title)
+    if from_file and from_file != from_title and from_file in on_page and from_title not in on_page:
+        return MonthDecision(from_file, f"card title says {from_title}, page and file name say {from_file}")
+    return MonthDecision(from_title, "")
+
+
 def classify(title: str, filename: str = "", page_title: str = "") -> Classification:
     clean = re.sub(r"\s+", " ", title).strip()
     kind = classify_kind(clean)
+    month = decide_month(clean, kind, filename, page_title)
     return Classification(
         kind=kind,
         version=classify_version(clean),
-        reporting_month=classify_month(clean, kind, page_title),
+        reporting_month=month.month,
         revision=classify_revision(clean, filename),
+        note=month.note,
     )

@@ -7,6 +7,7 @@ Notable changes to MentalScape 2.0. Dates are UK dates.
 - Decision records 0002 to 0007 accepted, and 0009 and 0010 added
 - Automated MHSDS ingest in `src/mentalscape/ingest`, with a classifier built from every card title published since 2022
 - `Ingest MHSDS` GitHub Actions workflow publishing raw files and a checksummed manifest to the `data-mhsds-monthly` release
+- Discovery moved to a browser step after NHS England's pages were found to challenge cloud servers (ADR 0011), with the catalogue committed as `data/reference/mhsds_catalogue.csv`
 - Pipeline guide in `docs/data/pipeline.md`
 
 ## 0.1.0, 13 October 2026, Phase 0 foundations

@@ -40,6 +40,7 @@ class CatalogueEntry:
     revision: int
     wanted: bool
     reason: str
+    note: str = ""
 
 
 @dataclass(frozen=True)
@@ -64,14 +65,27 @@ def _write(rows: Iterable[object], row_type: type, path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     names = [f.name for f in fields(row_type)]
     with path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=names)
+        writer = csv.DictWriter(handle, fieldnames=names, lineterminator="\n")
         writer.writeheader()
         for row in rows:
             writer.writerow(asdict(row))
 
 
 def write_catalogue(rows: Iterable[CatalogueEntry], path: Path) -> None:
-    _write(rows, CatalogueEntry, path)
+    """Write the catalogue in a stable order so that git diffs show only real changes."""
+    ordered = sorted(rows, key=lambda r: (r.reporting_month, r.kind, r.version, r.revision, r.source_url))
+    _write(ordered, CatalogueEntry, path)
+
+
+def read_catalogue(path: Path) -> list[CatalogueEntry]:
+    with path.open(newline="", encoding="utf-8") as handle:
+        rows = list(csv.DictReader(handle))
+    out = []
+    for row in rows:
+        row["revision"] = int(row["revision"])
+        row["wanted"] = row["wanted"] == "True"
+        out.append(CatalogueEntry(**row))
+    return out
 
 
 def write_manifest(rows: Iterable[ManifestEntry], path: Path) -> None:
