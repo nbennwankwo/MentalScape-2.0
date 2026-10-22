@@ -2,19 +2,47 @@
     Every model calls these macros, so the models themselves are identical on
     both databases (docs/adr/0010). -#}
 
-{#- NHS England has published dates as 01/07/2022 and as 2022-07-01. -#}
+{#- True when a column matches a regular expression. -#}
+{% macro regex_match(column, pattern) -%}
+    {{ return(adapter.dispatch('regex_match')(column, pattern)) }}
+{%- endmacro %}
+
+{% macro duckdb__regex_match(column, pattern) -%}
+    regexp_matches({{ column }}, '{{ pattern }}')
+{%- endmacro %}
+
+{% macro postgres__regex_match(column, pattern) -%}
+    ({{ column }} ~ '{{ pattern }}')
+{%- endmacro %}
+
+{#- NHS England has published dates in five styles (docs/data/mhsds_change_log.md).
+        01/07/2022  most files
+        1/4/2024    End of Year Final files for 2024-25
+        01/06/24    End of Year Final file for June 2024
+        2023-06-01  some 2023-24 rows and the 2025-26 final files
+        01-04-2025  End of Year Final file for April 2025
+    Each style is matched exactly and split into day, month and year, so a
+    date is never silently misread, for example 24 as the year 24 AD.
+    Anything else stays null and the not_null test fails. -#}
 {% macro parse_nhs_date(column) -%}
-    {{ return(adapter.dispatch('parse_nhs_date')(column)) }}
-{%- endmacro %}
-
-{% macro duckdb__parse_nhs_date(column) -%}
-    cast(coalesce(try_strptime(trim({{ column }}), '%d/%m/%Y'), try_strptime(trim({{ column }}), '%Y-%m-%d')) as date)
-{%- endmacro %}
-
-{% macro postgres__parse_nhs_date(column) -%}
+    {%- set value = "trim(" ~ column ~ ")" -%}
     case
-        when trim({{ column }}) ~ '^[0-9]{2}/[0-9]{2}/[0-9]{4}$' then to_date(trim({{ column }}), 'DD/MM/YYYY')
-        when trim({{ column }}) ~ '^[0-9]{4}-[0-9]{2}-[0-9]{2}$' then to_date(trim({{ column }}), 'YYYY-MM-DD')
+        when {{ regex_match(value, '^[0-9]{1,2}/[0-9]{1,2}/[0-9]{4}$') }} then make_date(
+            cast(split_part({{ value }}, '/', 3) as integer),
+            cast(split_part({{ value }}, '/', 2) as integer),
+            cast(split_part({{ value }}, '/', 1) as integer))
+        when {{ regex_match(value, '^[0-9]{1,2}/[0-9]{1,2}/[0-9]{2}$') }} then make_date(
+            2000 + cast(split_part({{ value }}, '/', 3) as integer),
+            cast(split_part({{ value }}, '/', 2) as integer),
+            cast(split_part({{ value }}, '/', 1) as integer))
+        when {{ regex_match(value, '^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}$') }} then make_date(
+            cast(split_part({{ value }}, '-', 1) as integer),
+            cast(split_part({{ value }}, '-', 2) as integer),
+            cast(split_part({{ value }}, '-', 3) as integer))
+        when {{ regex_match(value, '^[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}$') }} then make_date(
+            cast(split_part({{ value }}, '-', 3) as integer),
+            cast(split_part({{ value }}, '-', 2) as integer),
+            cast(split_part({{ value }}, '-', 1) as integer))
     end
 {%- endmacro %}
 
@@ -37,6 +65,8 @@
 {#- The many published geography labels mapped onto six stable levels (docs/adr/0004). -#}
 {% macro canonical_geo_level(label) -%}
     case
+        -- In 2022-23 the national ethnicity split had no geography in its label.
+        when lower({{ label }}) = 'ethnicity (white british/non-white british)' then 'England'
         when lower({{ label }}) like '%sub icb%' then 'Sub ICB'
         when lower({{ label }}) like '%icb%' then 'ICB'
         when lower({{ label }}) like '%commissioning region%' then 'Commissioning Region'

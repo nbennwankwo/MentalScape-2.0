@@ -138,8 +138,9 @@ class PostgresTarget:
     def reset(self) -> None:
         with self.con.cursor() as cur:
             cur.execute("CREATE SCHEMA IF NOT EXISTS raw")
-            cur.execute("DROP TABLE IF EXISTS raw.mhsds_main")
-            cur.execute("DROP TABLE IF EXISTS raw.mhsds_files")
+            # CASCADE also drops the dbt staging views built on these tables. dbt rebuilds them.
+            cur.execute("DROP TABLE IF EXISTS raw.mhsds_main CASCADE")
+            cur.execute("DROP TABLE IF EXISTS raw.mhsds_files CASCADE")
             cols = ", ".join(f"{c} TEXT" for c in SOURCE_COLUMNS + META_COLUMNS)
             cur.execute(f"CREATE TABLE raw.mhsds_main ({cols})")
             cur.execute(f"CREATE TABLE raw.mhsds_files ({', '.join(f'{c} TEXT' for c in MANIFEST_COLUMNS)})")

@@ -31,6 +31,7 @@ select
     max(icb_name) as icb_name,
     min(release_month) as valid_from_month,
     max(release_month) as valid_to_month,
-    count(*) as releases
+    count(*) as releases,
+    sum(case when icb_source = 'carried forward from previous month' then 1 else 0 end) as months_carried_forward
 from runs
 group by sub_icb_code, icb_code, run_number

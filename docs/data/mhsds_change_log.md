@@ -71,11 +71,15 @@ Mixing versions creates false changes. An early run of this analysis used the Pe
 
 **Name conflicts.** The 2025-26 final files give 24 Sub ICB codes two names each, and label Frimley as "NHS FRIMLEY CCG", a body that was abolished in 2022. One local authority code flips between Tewkesbury and North Gloucestershire depending on the file version.
 
+**The March 2026 final file uses post merger names.** It was produced after 1 April 2026, so it gives the 23 re-parented Sub ICBs only their new names, such as "NHS ESSEX ICB - 06Q", while its ICB rows still show the old 42 ICBs. A Sub ICB's name therefore points to an ICB that does not appear in that file. The warehouse keeps the ICB from the previous release for those rows and labels them as carried forward ([pipeline](pipeline.md)).
+
+**A national breakdown with no geography in its label.** In 2022-23 the national split by ethnicity is labelled "Ethnicity (White British/Non-White British)", with no mention of England. It is mapped to England explicitly.
+
 **Providers.** The number of providers reporting grew from 408 to 518, with a steady churn of providers joining and leaving.
 
 ### 5. File format
 
-- **Dates** appear as `01/07/2022` in most files and `2023-06-01` in others. The twelve 2023-24 files mix both styles in one file.
+- **Dates** appear in five styles. Most files use `01/07/2022`. Others use `2023-06-01`, and the twelve 2023-24 files mix both in one file. Three more turned up when every End of Year Final file was loaded into the warehouse. The 2024-25 finals drop leading zeros (`1/4/2024`), the June 2024 final uses two digit years (`01/06/24`), and the April 2025 final uses hyphens (`01-04-2025`). Read carelessly, a two digit year becomes the year 24 and a reporting window appears to last 24,000 months.
 - **Line endings** are usually Windows style, but most End of Year Final files mix Windows and Unix line endings in one file. Some CSV readers fail on this, as DuckDB did on August 2023 until the file was normalised.
 - **File size** roughly doubled from July 2025, from about 400,000 rows to about 800,000, because of 45 new breakdowns by ethnicity, deprivation, age, learning disability and autism status, and Mental Health Act legal status.
 - **Formatted Excel files** were dropped from April 2026. Only CSV is published.
@@ -117,7 +121,7 @@ These notices, taken from the release pages, must travel with the affected measu
 2. **Versions.** The raw layer keeps every version. The staging layer prefers End of Year Final where it exists and records which version each value came from ([ADR 0003](../adr/0003-time-window-and-release-versions.md)).
 3. **Geography.** Sub ICB codes are the building block, with a dated lookup to old and new ICBs ([ADR 0004](../adr/0004-geography-harmonisation.md)).
 4. **Measure catalogue.** [`mhsds_measure_catalogue.csv`](../../data/reference/mhsds_measure_catalogue.csv) records every ID's first and last appearance and its name history. Models only use measures with a continuous history, or handle the break explicitly.
-5. **Data tests.** The warehouse will fail loudly on unknown measure IDs, missing Sub ICBs, new date styles, mixed line endings, unknown status labels and one off jumps in England totals.
+5. **Data tests.** The warehouse fails on missing Sub ICBs, new date styles, unknown status labels and windows, duplicate values and gaps in the months. It reads mixed line endings from a normalised copy. It warns, rather than fails, on measure IDs the change log has never seen, on Sub ICBs with no ICB and on large jumps in England totals, because those are often real and need a person to judge them. The full list is in the [pipeline guide](pipeline.md).
 6. **Seasonality.** Forecasts include school term and financial year effects.
 7. **Caveats.** The data quality notices above are stored as data and shown wherever the measure appears.
 

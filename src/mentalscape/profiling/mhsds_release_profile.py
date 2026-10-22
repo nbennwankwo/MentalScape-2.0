@@ -56,7 +56,17 @@ EXPECTED_COLUMNS = (
 SUPPRESSION_MARKER = "*"
 
 # Dates have been published as both 01/07/2022 and 2022-07-01 over the years.
-DATE_SQL = "coalesce(try_strptime(trim({col}), '%d/%m/%Y'), try_strptime(trim({col}), '%Y-%m-%d'))"
+# Dates have been published in five styles, 01/07/2022, 1/4/2024, 01/06/24,
+# 2023-06-01 and 01-04-2025. Each is matched exactly so that a two digit year
+# is never read as a year in the first century.
+DATE_SQL = (
+    "CASE "
+    "WHEN regexp_matches(trim({col}), '^[0-9]{{1,2}}/[0-9]{{1,2}}/[0-9]{{4}}$') THEN strptime(trim({col}), '%d/%m/%Y') "
+    "WHEN regexp_matches(trim({col}), '^[0-9]{{1,2}}/[0-9]{{1,2}}/[0-9]{{2}}$') THEN strptime(trim({col}), '%d/%m/%y') "
+    "WHEN regexp_matches(trim({col}), '^[0-9]{{4}}-[0-9]{{1,2}}-[0-9]{{1,2}}$') THEN strptime(trim({col}), '%Y-%m-%d') "
+    "WHEN regexp_matches(trim({col}), '^[0-9]{{1,2}}-[0-9]{{1,2}}-[0-9]{{4}}$') THEN strptime(trim({col}), '%d-%m-%Y') "
+    "END"
+)
 
 
 @dataclass(frozen=True)

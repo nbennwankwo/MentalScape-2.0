@@ -1,8 +1,8 @@
 # SQL
 
-The PostgreSQL warehouse and its dbt project arrive in Phase 1 (see [ADR 0002](../docs/adr/0002-sql-warehouse-postgres-and-dbt.md)).
+The warehouse and its dbt project live in [`warehouse/`](../warehouse) (see [ADR 0002](../docs/adr/0002-sql-warehouse-postgres-and-dbt.md) and the [pipeline guide](../docs/data/pipeline.md)).
 
-Until then this folder holds hand written exploration queries that run in DuckDB against the raw files. For example, the query below lists every measure in a release with its suppression rate.
+This folder holds hand written exploration queries that run in DuckDB against the raw files. For example, the query below lists every measure in a release with its suppression rate.
 
 ```sql
 SELECT

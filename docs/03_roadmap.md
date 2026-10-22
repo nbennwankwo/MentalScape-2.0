@@ -25,11 +25,15 @@ The timeline assumes about 10 to 15 hours a week. Dates are targets, not promise
 
 - [x] Discovery of every MHSDS monthly release from a browser, and automated download on GitHub Actions, including End of Year Final reissues ([pipeline](data/pipeline.md), [ADR 0011](adr/0011-split-discovery-from-collection.md))
 - [x] Checksummed manifest of every file and version, stored with the raw files as GitHub Release assets ([ADR 0009](adr/0009-raw-files-in-github-release-assets.md))
-- [ ] PostgreSQL warehouse with raw, staging and mart layers built in dbt, also runnable on DuckDB locally ([ADR 0010](adr/0010-duckdb-locally-postgresql-in-ci.md))
-- [ ] Geography harmonisation across the April 2023 local authority changes and the April 2026 ICB mergers
-- [ ] Release version handling, preferring End of Year Final over Performance where both exist
-- [ ] Data tests driven by the change log findings
+- [x] PostgreSQL warehouse with raw, staging and mart layers built in dbt, also runnable on DuckDB locally ([pipeline](data/pipeline.md), [ADR 0010](adr/0010-duckdb-locally-postgresql-in-ci.md))
+- [x] Geography harmonisation across the April 2026 ICB mergers, as a dated Sub ICB to ICB lookup ([ADR 0004](adr/0004-geography-harmonisation.md))
+- [x] Release version handling, preferring End of Year Final over Performance where both exist
+- [x] Data tests driven by the change log findings
+- [ ] Geography harmonisation across the April 2023 local authority changes, which needs the ONS lookup and so comes with the ONS data below
 - [ ] Talking Therapies, Indices of Deprivation 2025 and ONS population loaded
+- [ ] A scheduled job that rebuilds the whole warehouse after each new release
+
+**Status, 22 October 2026.** Every MHSDS main data file from July 2022 to August 2026 is in the warehouse, 26.2 million values across 429 measures, and `make warehouse` rebuilds it in about five minutes. The remaining items are the other sources and the scheduled rebuild.
 
 **Visible result** one command, or one scheduled job, rebuilds the whole warehouse from source.
 

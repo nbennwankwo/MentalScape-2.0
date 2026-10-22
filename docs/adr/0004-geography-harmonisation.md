@@ -25,3 +25,7 @@ Rebuilding every series from LSOA level would be more exact, but the published d
 ## Consequences
 
 Trends can run across the 2026 mergers for most areas. A small number of split areas carry a break that is shown to users rather than hidden.
+
+## Implementation note, 22 October 2026
+
+Built in Phase 1 as `int_geo__sub_icb_monthly` and `geo_sub_icb_membership` in the warehouse. The ICB of each Sub ICB is read from the parent ICB named in the Sub ICB's own label, checked against that month's ICB rows. The March 2026 End of Year Final file gives 23 Sub ICBs only their post merger names, so for that file the ICB from the previous release is carried forward and labelled as such. Local authority harmonisation for the April 2023 changes is still to do and needs the ONS lookup.

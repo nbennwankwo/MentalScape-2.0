@@ -39,8 +39,30 @@ matched as (
     from sub_icb_names as s
     left join icb_names as i
         on i.release_month = s.release_month and i.icb_key = s.parent_key
+),
+
+best as (
+    select release_month, sub_icb_code, sub_icb_name, icb_code, icb_name
+    from matched
+    where preference = 1
 )
 
-select release_month, sub_icb_code, sub_icb_name, icb_code, icb_name
-from matched
-where preference = 1
+-- The March 2026 final file was produced after the April 2026 mergers, so it
+-- gives some Sub ICBs only their new names while its ICB rows are still the old
+-- ICBs. No name matches. In that case the ICB matched in the Sub ICB's
+-- previous release is used and icb_source says so. Only one step is carried,
+-- so two unmatched releases in a row leave the second one unmatched, and the
+-- not_null test on membership warns about it.
+select
+    release_month,
+    sub_icb_code,
+    sub_icb_name,
+    coalesce(icb_code, lag(icb_code) over (partition by sub_icb_code order by release_month)) as icb_code,
+    coalesce(icb_name, lag(icb_name) over (partition by sub_icb_code order by release_month)) as icb_name,
+    case
+        when icb_code is not null then 'matched by name'
+        when lag(icb_code) over (partition by sub_icb_code order by release_month) is not null
+            then 'carried forward from previous month'
+        else 'unmatched'
+    end as icb_source
+from best

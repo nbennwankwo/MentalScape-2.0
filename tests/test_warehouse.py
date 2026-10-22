@@ -45,7 +45,7 @@ def test_raw_load_into_duckdb(fixture_paths):
     db = root / "raw_only.duckdb"
     total = load(manifest, assets, "duckdb", db, work_dir=root / "work")
     con = duckdb.connect(str(db), read_only=True)
-    assert con.execute("select count(*) from raw.mhsds_main").fetchone()[0] == total == 53
+    assert con.execute("select count(*) from raw.mhsds_main").fetchone()[0] == total == 49
     assert con.execute("select count(*) from raw.mhsds_files where is_preferred = 'True'").fetchone()[0] == 3
     con.close()
 
@@ -84,6 +84,11 @@ def test_dbt_build_on_fixture(fixture_paths, monkeypatch):
         "select sub_icb_code, icb_code, valid_from_month from marts.geo_sub_icb_membership order by 1, 3"
     ).fetchall()
     assert ("06Q", "QH8", "2026-02") in membership and ("06Q", "D7T5G", "2026-04") in membership
+    carried = con.execute(
+        "select valid_to_month, months_carried_forward from marts.geo_sub_icb_membership "
+        "where sub_icb_code = '06Q' and icb_code = 'QH8'"
+    ).fetchone()
+    assert carried == ("2026-03", 1)
     assert con.execute("select status from marts.dim_sub_icb where sub_icb_code = 'D4U1Y'").fetchone()[0] == "retired"
     assert con.execute("select windows from marts.dim_mhsds_measure where measure_id = 'MHS32'").fetchone()[0] == "1,3"
     assert (

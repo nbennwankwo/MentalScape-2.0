@@ -7,7 +7,8 @@ the warehouse has to cope with the same problems as the real data.
     Essex ICB to Essex ICB
     Frimley's Sub ICB D4U1Y disappearing and Thames Valley's U2G6B appearing
     one Sub ICB code carrying two names in the same file
-    both date styles and mixed line endings
+    a month where a Sub ICB carries only its post merger name
+    all five date styles and mixed line endings
     MHS32 published for a one month and a three month window
     a status label with a trailing space
     two versions of March 2026, where the final one must win
@@ -44,6 +45,16 @@ BEFORE_MERGER = {
         ("QHM", "NHS NORTH EAST AND NORTH CUMBRIA INTEGRATED CARE BOARD"),
     ],
 }
+# Like the real March 2026 final file, produced after the mergers, so 06Q only
+# carries its new name while the ICB rows are still the old ICBs.
+MARCH_FINAL = {
+    "sub_icbs": [
+        ("Sub ICB of GP Practice or Residence", "06Q", "NHS ESSEX ICB - 06Q"),
+        ("Sub ICB of GP Practice or Residence", "D4U1Y", "NHS FRIMLEY ICB - D4U1Y"),
+        ("Sub ICB of GP Practice or Residence", "00L", "NHS NORTH EAST AND NORTH CUMBRIA ICB - 00L"),
+    ],
+    "icbs": BEFORE_MERGER["icbs"],
+}
 AFTER_MERGER = {
     "sub_icbs": [
         ("Sub ICB of GP Practice or Residence", "06Q", "NHS ESSEX ICB - 06Q"),
@@ -60,19 +71,30 @@ AFTER_MERGER = {
 MONTHS = {
     # month: (geography, date style, status, first day, last day, previous quarter start)
     "2026-02": (BEFORE_MERGER, "iso", "Final", "2026-02-01", "2026-02-28", "2025-12-01"),
-    "2026-03": (BEFORE_MERGER, "dmy", "Final", "2026-03-01", "2026-03-31", "2026-01-01"),
+    "2026-03": (MARCH_FINAL, "dmy", "Final", "2026-03-01", "2026-03-31", "2026-01-01"),
     "2026-04": (AFTER_MERGER, "dmy", "Performance ", "2026-04-01", "2026-04-30", "2026-02-01"),
 }
 
 
 def _fmt(iso: str, style: str) -> str:
+    """Write a date in one of the five styles NHS England has used."""
     year, month, day = iso.split("-")
-    return iso if style == "iso" else f"{day}/{month}/{year}"
+    return {
+        "iso": iso,
+        "dmy": f"{day}/{month}/{year}",
+        "dmy_unpadded": f"{int(day)}/{int(month)}/{year}",
+        "dmy_two_digit_year": f"{day}/{month}/{year[2:]}",
+        "dmy_hyphen": f"{day}-{month}-{year}",
+    }[style]
+
+
+# The rolling three month row of each month uses one of the rarer date styles.
+QUARTER_STYLE = {"2026-02": "dmy_unpadded", "2026-03": "dmy_two_digit_year", "2026-04": "dmy_hyphen"}
 
 
 def month_rows(month: str, scale: int = 1) -> list[str]:
     geo, style, status, first, last, quarter = MONTHS[month]
-    start, end, q_start = _fmt(first, style), _fmt(last, style), _fmt(quarter, style)
+    start, end, q_start = _fmt(first, style), _fmt(last, style), _fmt(quarter, QUARTER_STYLE[month])
     rows = []
 
     def add(s: str, breakdown: str, code: str, name: str, mid: str, mname: str, value: str) -> None:

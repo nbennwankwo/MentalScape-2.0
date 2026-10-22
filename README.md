@@ -3,7 +3,7 @@
 **Decision support for NHS mental health service planning in England, from open data to recommendation.**
 
 [![CI](https://github.com/nbennwankwo/MentalScape-2.0/actions/workflows/ci.yml/badge.svg)](https://github.com/nbennwankwo/MentalScape-2.0/actions/workflows/ci.yml)
-![Status](https://img.shields.io/badge/status-Phase%200%20foundations-blue)
+![Status](https://img.shields.io/badge/status-Phase%201%20data%20engineering-blue)
 ![Python](https://img.shields.io/badge/python-3.12-blue)
 ![Licence](https://img.shields.io/badge/licence-MIT-green)
 
@@ -26,7 +26,7 @@ Every feature traces back to a question that a real decision maker asks. See [wh
 
 ## Where the project is now
 
-**Phase 0, foundations, is complete.** The [roadmap](docs/03_roadmap.md) shows every phase and its status.
+**Phase 0, foundations, is complete, and Phase 1, data engineering, is well under way.** Every MHSDS monthly file since July 2022 is now collected automatically, checksummed and loaded into a tested dbt warehouse that runs on DuckDB locally and PostgreSQL in CI. The [pipeline guide](docs/data/pipeline.md) explains each step, and the [roadmap](docs/03_roadmap.md) shows every phase and its status.
 
 The first piece of real analysis is a full history of the source data. The [MHSDS change log](docs/data/mhsds_change_log.md) profiles every monthly release of the Mental Health Services Monthly Statistics from July 2022 to August 2026, and records every measure, breakdown and geography change, with what each one means for modelling.
 
@@ -65,7 +65,9 @@ data/reference/    small committed reference tables (raw data is never committed
 docs/              charter, users, architecture, roadmap, data, decisions, research
 src/mentalscape/   Python package
 tests/             tests that run in CI on every change
-sql/               SQL, and the dbt project from Phase 1
+warehouse/         the dbt project, with models, macros, seeds and data tests
+tools/             the browser script that lists NHS England's release files
+sql/               exploration queries
 notebooks/         exploration only, outputs stripped
 ```
 
@@ -80,7 +82,9 @@ make setup
 make check
 ```
 
-To rebuild the change log, put MHSDS main data files in `data/raw/mhsds_monthly/` and run `make profile` then `make changelog`. Phase 1 replaces the manual download with an automated one.
+To build the warehouse from every real month, run `make warehouse`. It downloads the collected files from the project's data release, checks their checksums and builds a DuckDB file at `data/warehouse/mentalscape.duckdb`. No database server is needed. `make warehouse-fixture` does the same on a small synthetic dataset in seconds.
+
+To rebuild the change log, put MHSDS main data files in `data/raw/mhsds_monthly/` and run `make profile` then `make changelog`.
 
 ## Documentation
 
