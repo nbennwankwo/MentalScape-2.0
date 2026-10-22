@@ -2,10 +2,36 @@ version: 2
 
 sources:
   - name: raw
-    description: Exact copies of NHS England files, loaded by mentalscape.warehouse.load
+    description: Exact copies of published files, loaded by mentalscape.warehouse.load with every value as text
     schema: raw
     tables:
       - name: mhsds_main
-        description: Every row of the preferred main data file for each month, all values as text
+        description: Every row of the preferred MHSDS main data file for each month
       - name: mhsds_files
-        description: Every collected file from the manifest, with a flag for the one used per month
+        description: Every collected MHSDS file from the manifest, with a flag for the one used per month
+      - name: talking_therapies_activity
+        description: Every row of the preferred NHS Talking Therapies activity file for each month, IAPT files included
+      - name: talking_therapies_files
+        description: Every collected NHS Talking Therapies file, with a flag for the one used per month
+      - name: reference_files
+        description: Every collected reference file, from the data-reference release
+      - name: ref_iod_2025_file7
+        description: English Indices of Deprivation 2025, File 7, one row per LSOA 2021
+      - name: ref_ons_lsoa_population_2022_2024
+        description: ONS mid year population estimates by LSOA 2021, single year of age and sex, one sheet per year
+      - name: ref_lsoa11_sicbl_icb_lad_2022
+        description: ONS lookup, LSOA 2011 to Sub ICB, ICB and local authority, July 2022
+      - name: ref_lsoa21_sicbl_icb_lad_2023
+        description: ONS lookup, LSOA 2021 to Sub ICB, ICB and local authority, April 2023
+      - name: ref_lsoa21_sicbl_icb_lad_2024
+        description: ONS lookup, LSOA 2021 to Sub ICB, ICB and local authority, April 2024
+      - name: ref_lsoa21_sicbl_icb_lad_2025
+        description: ONS lookup, LSOA 2021 to Sub ICB, ICB and local authority, April 2025
+      - name: ref_lsoa21_sicbl_icb_lad_2026
+        description: ONS lookup, LSOA 2021 to Sub ICB, ICB, NHS region and local authority, April 2026
+      - name: ref_lad22_lad23
+        description: ONS lookup from 2022 to 2023 local authority districts
+      - name: ref_lad22_cty22
+        description: ONS lookup from local authority districts to counties, December 2022
+      - name: ref_lad23_cty23
+        description: ONS lookup from local authority districts to counties, April 2023

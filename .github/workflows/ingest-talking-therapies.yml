@@ -1,0 +1,113 @@
+name: Ingest NHS Talking Therapies
+
+# Collects the NHS Talking Therapies files listed in the committed catalogue
+# and stores them on the data-talking-therapies-monthly release
+# (docs/adr/0009, 0011, 0012).
+#   push to main       runs when the catalogue changes
+#   schedule           every Friday, also checks the catalogue is not stale
+#   workflow_dispatch  run by hand, optionally with a limit on new downloads
+#   pull_request       a trial run that collects three months from different
+#                      eras of the publication and publishes them to the
+#                      data-staging release only
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "data/reference/talking_therapies_catalogue.csv"
+  schedule:
+    - cron: "37 6 * * 5"
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "Download at most this many new files (leave blank for all)"
+        required: false
+        default: ""
+  pull_request:
+    paths:
+      - "src/mentalscape/ingest/**"
+      - "data/reference/talking_therapies_catalogue.csv"
+      - "config/sources.yaml"
+      - ".github/workflows/ingest-talking-therapies.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ingest-talking-therapies-${{ github.event_name == 'pull_request' && 'trial' || 'main' }}
+  cancel-in-progress: false
+
+env:
+  # Months a pull request trial collects. Set to all for a one off full trial
+  # before a change that depends on every file, then set it back.
+  TRIAL_MONTHS: "2022-07,2023-01,2026-08"
+  RELEASE_TAG: data-talking-therapies-monthly
+  STAGING_TAG: data-staging
+  OUT_DIR: data/interim/ingest
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      GH_TOKEN: ${{ github.token }}
+      EVENT_NAME: ${{ github.event_name }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+
+      - name: Install
+        run: |
+          uv python install 3.12
+          uv sync
+
+      - name: Check the catalogue is up to date
+        run: uv run python -m mentalscape.ingest.talking_therapies check
+
+      - name: Fetch the current manifest
+        run: |
+          mkdir -p "$OUT_DIR/existing"
+          if [ "$EVENT_NAME" != "pull_request" ]; then
+            gh release download "$RELEASE_TAG" --pattern manifest.csv --dir "$OUT_DIR/existing" --clobber \
+              || echo "No data release yet, starting a new manifest"
+          fi
+
+      - name: Collect new files
+        env:
+          INPUT_LIMIT: ${{ inputs.limit }}
+        run: |
+          args=(collect --out-dir "$OUT_DIR")
+          if [ -f "$OUT_DIR/existing/manifest.csv" ]; then args+=(--manifest "$OUT_DIR/existing/manifest.csv"); fi
+          if [ "$EVENT_NAME" = "pull_request" ] && [ "$TRIAL_MONTHS" != "all" ]; then args+=(--months "$TRIAL_MONTHS"); fi
+          if [ -n "$INPUT_LIMIT" ]; then args+=(--limit "$INPUT_LIMIT"); fi
+          uv run python -m mentalscape.ingest.talking_therapies "${args[@]}"
+          cat "$OUT_DIR/summary.md" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Publish to the data release
+        if: github.event_name != 'pull_request'
+        run: |
+          if ! gh release view "$RELEASE_TAG" > /dev/null 2>&1; then
+            gh release create "$RELEASE_TAG" --title "NHS Talking Therapies monthly raw files" \
+              --notes-file .github/release-notes/data-talking-therapies-monthly.md --latest=false
+          fi
+          if [ -s "$OUT_DIR/new_assets.txt" ]; then
+            sed "s|^|$OUT_DIR/assets/|" "$OUT_DIR/new_assets.txt" | xargs -d '\n' -n 20 gh release upload "$RELEASE_TAG" --clobber
+          fi
+          cp data/reference/talking_therapies_catalogue.csv "$OUT_DIR/catalogue.csv"
+          gh release upload "$RELEASE_TAG" "$OUT_DIR/manifest.csv" "$OUT_DIR/catalogue.csv" --clobber
+
+      - name: Publish the trial files to the staging release
+        if: github.event_name == 'pull_request'
+        run: |
+          if ! gh release view "$STAGING_TAG" > /dev/null 2>&1; then
+            gh release create "$STAGING_TAG" --title "Trial files from pull requests" \
+              --notes-file .github/release-notes/data-staging.md --prerelease --latest=false
+          fi
+          if [ -s "$OUT_DIR/new_assets.txt" ]; then
+            sed "s|^|$OUT_DIR/assets/|" "$OUT_DIR/new_assets.txt" | xargs -d '\n' -n 20 gh release upload "$STAGING_TAG" --clobber
+          fi
+          cp "$OUT_DIR/manifest.csv" "$OUT_DIR/talking_therapies_manifest.csv"
+          gh release upload "$STAGING_TAG" "$OUT_DIR/talking_therapies_manifest.csv" --clobber

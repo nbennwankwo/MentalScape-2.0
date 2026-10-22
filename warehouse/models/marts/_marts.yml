@@ -67,3 +67,86 @@ models:
     columns:
       - name: icb_code
         data_tests: [unique, not_null]
+
+  - name: dim_local_authority
+    description: Every local authority code MHSDS has published, with its tier, lifetime and any April 2023 successor
+    columns:
+      - name: la_code
+        data_tests: [unique, not_null]
+      - name: status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["current", "abolished", "not in latest release"]
+
+  - name: geo_local_authority_successor
+    description: The successor of every local authority abolished in April 2023 and how its figures relate
+
+  - name: fct_talking_therapies_values
+    description: Analysis ready NHS Talking Therapies values, with the ICB of each Sub ICB from the dated membership
+    data_tests:
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [release_month, group_type, org_code1, org_code2, measure_id]
+    columns:
+      - name: measure_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_talking_therapies_measure')
+                field: measure_id
+
+  - name: dim_talking_therapies_measure
+    description: One row per NHS Talking Therapies measure ID with its statistic and lifetime
+    columns:
+      - name: measure_id
+        data_tests: [unique, not_null]
+
+  - name: dim_talking_therapies_release
+    description: One row per NHS Talking Therapies release month with the file used
+    columns:
+      - name: release_month
+        data_tests: [unique, not_null]
+      - name: version_used
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["final", "performance"]
+
+  - name: fct_population
+    description: ONS population by single year of age and sex for every area and boundary edition since April 2023
+    data_tests:
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [boundary_edition, population_year, geo_level, geo_code, sex, age]
+    columns:
+      - name: population
+        data_tests: [not_null]
+
+  - name: fct_population_monthly
+    description: Population denominators by area and broad age band for every release month
+    data_tests:
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [release_month, geo_level, geo_code, age_band]
+    columns:
+      - name: population
+        data_tests: [not_null]
+
+  - name: fct_deprivation_lsoa
+    description: The Indices of Deprivation 2025 for every LSOA with its April 2026 Sub ICB, ICB and local authority
+    columns:
+      - name: lsoa_code
+        data_tests: [unique, not_null]
+      - name: sub_icb_code
+        data_tests: [not_null]
+
+  - name: fct_deprivation_area
+    description: The Indices of Deprivation 2025 summarised for every Sub ICB, ICB and local authority
+    data_tests:
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [boundary_edition, geo_level, geo_code]
+    columns:
+      - name: imd_average_score
+        data_tests: [not_null]

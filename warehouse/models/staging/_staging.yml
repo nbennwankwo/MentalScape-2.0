@@ -41,3 +41,102 @@ models:
     columns:
       - name: asset_name
         data_tests: [unique, not_null]
+
+  - name: stg_talking_therapies__values
+    description: Every published NHS Talking Therapies value from the preferred activity file of each month, IAPT files included
+    columns:
+      - name: release_month
+        data_tests: [not_null]
+      - name: period_start
+        description: Parsed with the same date rules as MHSDS. Null would mean a new style.
+        data_tests: [not_null]
+      - name: period_end
+        data_tests: [not_null]
+      - name: measure_id
+        data_tests: [not_null]
+      - name: group_type
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["England", "CommissioningRegion", "SubICB", "Provider", "SubICB/Provider"]
+      - name: geo_level
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["England", "Commissioning Region", "Sub ICB", "Commissioning Hub", "Provider",
+                         "Sub ICB and Provider", "Commissioning Hub and Provider"]
+      - name: statistic
+        description: The first word of the measure name. Only counts can ever be added up.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["Count", "Percentage", "Mean", "Median", "Max", "Min"]
+      - name: file_version
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["final", "performance"]
+      - name: window_months
+        description: Activity files cover a single month
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [1]
+
+  - name: stg_talking_therapies__files
+    description: Every collected NHS Talking Therapies file and version from the manifest
+    columns:
+      - name: asset_name
+        data_tests: [unique, not_null]
+
+  - name: stg_ons__lsoa_health_lookup
+    description: One row per LSOA in each edition of the ONS LSOA to Sub ICB, ICB and local authority lookup
+    data_tests:
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [boundary_edition, lsoa_code]
+    columns:
+      - name: sub_icb_code
+        data_tests: [not_null]
+      - name: icb_code
+        data_tests: [not_null]
+      - name: lad_code
+        data_tests: [not_null]
+
+  - name: stg_ons__local_authority_lookups
+    description: One row per 2022 local authority district with what it became in April 2023
+    columns:
+      - name: lad22_code
+        data_tests: [unique, not_null]
+      - name: lad23_code
+        data_tests: [not_null]
+
+  - name: stg_ons__lsoa_population
+    description: ONS mid year population estimates for each English LSOA and year, by single year of age and sex
+    data_tests:
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [population_year, lsoa_code]
+    columns:
+      - name: population_year
+        description: Read from the sheet name. Null would mean a renamed sheet.
+        data_tests: [not_null]
+      - name: total
+        data_tests: [not_null]
+
+  - name: stg_iod__lsoa_2025
+    description: The English Indices of Deprivation 2025, one row per LSOA
+    columns:
+      - name: lsoa_code
+        data_tests: [unique, not_null]
+      - name: imd_rank
+        data_tests: [unique, not_null]
+      - name: imd_decile
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      - name: imd_score
+        data_tests: [not_null]
+      - name: population_total
+        data_tests: [not_null]

@@ -10,3 +10,23 @@ models:
           - accepted_values:
               arguments:
                 values: ["matched by name", "carried forward from previous month", "unmatched"]
+
+  - name: int_population__area_wide
+    description: LSOA population estimates added up to each area for each boundary edition and year, still wide
+    data_tests:
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [boundary_edition, population_year, geo_level, geo_code]
+
+  - name: int_geo__local_authority_successors
+    description: What replaced each local authority abolished on 1 April 2023, derived from ONS lookups only
+    data_tests:
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [old_code, new_code]
+    columns:
+      - name: change_type
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["merged", "same area", "split"]

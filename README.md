@@ -3,7 +3,7 @@
 **Decision support for NHS mental health service planning in England, from open data to recommendation.**
 
 [![CI](https://github.com/nbennwankwo/MentalScape-2.0/actions/workflows/ci.yml/badge.svg)](https://github.com/nbennwankwo/MentalScape-2.0/actions/workflows/ci.yml)
-![Status](https://img.shields.io/badge/status-Phase%201%20data%20engineering-blue)
+![Status](https://img.shields.io/badge/status-Phase%201%20complete-blue)
 ![Python](https://img.shields.io/badge/python-3.12-blue)
 ![Licence](https://img.shields.io/badge/licence-MIT-green)
 
@@ -26,7 +26,7 @@ Every feature traces back to a question that a real decision maker asks. See [wh
 
 ## Where the project is now
 
-**Phase 0, foundations, is complete, and Phase 1, data engineering, is well under way.** Every MHSDS monthly file since July 2022 is now collected automatically, checksummed and loaded into a tested dbt warehouse that runs on DuckDB locally and PostgreSQL in CI. The [pipeline guide](docs/data/pipeline.md) explains each step, and the [roadmap](docs/03_roadmap.md) shows every phase and its status.
+**Phases 0 and 1, foundations and data engineering, are complete.** Every MHSDS and NHS Talking Therapies monthly file since July 2022 is collected automatically, checksummed and loaded into a tested dbt warehouse, together with ONS population estimates, the Indices of Deprivation 2025 and ONS geography lookups. The warehouse runs on DuckDB locally and PostgreSQL in CI, and a scheduled job rebuilds it from source, runs every data test on all real data and publishes the result. The [pipeline guide](docs/data/pipeline.md) explains each step, and the [roadmap](docs/03_roadmap.md) shows every phase and its status.
 
 The first piece of real analysis is a full history of the source data. The [MHSDS change log](docs/data/mhsds_change_log.md) profiles every monthly release of the Mental Health Services Monthly Statistics from July 2022 to August 2026, and records every measure, breakdown and geography change, with what each one means for modelling.
 
@@ -82,7 +82,7 @@ make setup
 make check
 ```
 
-To build the warehouse from every real month, run `make warehouse`. It downloads the collected files from the project's data release, checks their checksums and builds a DuckDB file at `data/warehouse/mentalscape.duckdb`. No database server is needed. `make warehouse-fixture` does the same on a small synthetic dataset in seconds.
+To build the warehouse from all real data, run `make warehouse`. It downloads the collected files from the project's data releases, checks their checksums and builds a DuckDB file at `data/warehouse/mentalscape.duckdb` in about ten minutes. No database server is needed. `make warehouse-fixture` does the same on a small synthetic dataset in seconds. To skip the build, download `mentalscape.duckdb.zst` from the [`warehouse-latest`](https://github.com/nbennwankwo/MentalScape-2.0/releases/tag/warehouse-latest) release.
 
 To rebuild the change log, put MHSDS main data files in `data/raw/mhsds_monthly/` and run `make profile` then `make changelog`.
 

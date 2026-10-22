@@ -114,24 +114,32 @@ def sha256_of(path: Path) -> str:
     return digest.hexdigest()
 
 
-def asset_name(kind: str, reporting_month: str, version: str, revision: int, sha256: str, suffix: str) -> str:
+def asset_name(
+    kind: str, reporting_month: str, version: str, revision: int, sha256: str, suffix: str, prefix: str = "mhsds"
+) -> str:
     """Build a unique, readable asset name such as mhsds__main__2025-08__final__r1__3f2a9c1d0b.zip"""
-    return f"mhsds__{kind}__{reporting_month}__{version}__r{revision}__{sha256[:10]}{suffix}"
+    return f"{prefix}__{kind}__{reporting_month}__{version}__r{revision}__{sha256[:10]}{suffix}"
 
 
-def store_file(downloaded: Path, entry: CatalogueEntry, out_dir: Path, downloaded_at_utc: str) -> ManifestEntry:
+def store_file(
+    downloaded: Path, entry: CatalogueEntry, out_dir: Path, downloaded_at_utc: str, prefix: str = "mhsds"
+) -> ManifestEntry:
     """Copy a downloaded file into out_dir under its asset name, gzipping CSV files."""
     original_sha = sha256_of(downloaded)
     suffix = Path(entry.original_filename).suffix.lower() or f".{entry.file_type}"
     out_dir.mkdir(parents=True, exist_ok=True)
     if suffix == ".csv":
         stored_suffix = ".csv.gz"
-        name = asset_name(entry.kind, entry.reporting_month, entry.version, entry.revision, original_sha, stored_suffix)
+        name = asset_name(
+            entry.kind, entry.reporting_month, entry.version, entry.revision, original_sha, stored_suffix, prefix
+        )
         target = out_dir / name
         with downloaded.open("rb") as source, gzip.GzipFile(target, "wb", mtime=0) as sink:
             shutil.copyfileobj(source, sink)
     else:
-        name = asset_name(entry.kind, entry.reporting_month, entry.version, entry.revision, original_sha, suffix)
+        name = asset_name(
+            entry.kind, entry.reporting_month, entry.version, entry.revision, original_sha, suffix, prefix
+        )
         target = out_dir / name
         shutil.copyfile(downloaded, target)
     return ManifestEntry(

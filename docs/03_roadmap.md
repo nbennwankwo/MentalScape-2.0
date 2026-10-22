@@ -29,11 +29,11 @@ The timeline assumes about 10 to 15 hours a week. Dates are targets, not promise
 - [x] Geography harmonisation across the April 2026 ICB mergers, as a dated Sub ICB to ICB lookup ([ADR 0004](adr/0004-geography-harmonisation.md))
 - [x] Release version handling, preferring End of Year Final over Performance where both exist
 - [x] Data tests driven by the change log findings
-- [ ] Geography harmonisation across the April 2023 local authority changes, which needs the ONS lookup and so comes with the ONS data below
-- [ ] Talking Therapies, Indices of Deprivation 2025 and ONS population loaded
-- [ ] A scheduled job that rebuilds the whole warehouse after each new release
+- [x] Geography harmonisation across the April 2023 local authority changes, derived from ONS lookups only
+- [x] NHS Talking Therapies, including the IAPT years, Indices of Deprivation 2025 and ONS population loaded ([ADR 0012](adr/0012-collect-talking-therapies-and-reference-files.md))
+- [x] A scheduled job that rebuilds and tests the whole warehouse after each new release and publishes it ([ADR 0013](adr/0013-scheduled-warehouse-build.md))
 
-**Status, 22 October 2026.** Every MHSDS main data file from July 2022 to August 2026 is in the warehouse, 26.2 million values across 429 measures, and `make warehouse` rebuilds it in about five minutes. The remaining items are the other sources and the scheduled rebuild.
+**Status, 22 October 2026. Phase 1 is complete.** Every MHSDS and NHS Talking Therapies monthly file from July 2022 to August 2026 is collected automatically and loaded, 26.2 million and 12.6 million values. Population and deprivation are built up from LSOAs for every Sub ICB, ICB and local authority, on each ONS boundary edition since April 2023. The full build runs every model and data test on all real data, and `make warehouse` or the `Build warehouse` workflow rebuilds it from source in about ten minutes. NHS workforce data moves to Phase 3, with the simulation that needs it.
 
 **Visible result** one command, or one scheduled job, rebuilds the whole warehouse from source.
 
