@@ -347,3 +347,18 @@ def main(argv: list[str] | None = None) -> None:
 
 if __name__ == "__main__":
     main()
+
+
+def normalise_line_endings(csv_path: Path, work_dir: Path) -> tuple[Path, str]:
+    """Return a path that reads cleanly, plus a description of the original line endings.
+
+    Files with a single style of line ending are returned unchanged. Files that
+    mix Windows and Unix endings, as several End of Year Final files do, are
+    copied with every ending made Unix style.
+    """
+    crlf, total = count_line_endings(csv_path)
+    if crlf == 0:
+        return csv_path, "LF"
+    if crlf == total:
+        return csv_path, "CRLF"
+    return _normalised_copy(csv_path, work_dir), f"mixed ({crlf} of {total} lines CRLF)"

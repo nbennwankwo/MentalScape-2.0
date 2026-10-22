@@ -10,6 +10,7 @@ permissions:
 
 jobs:
   checks:
+    name: Lint and tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -19,10 +20,55 @@ jobs:
       - name: Set up Python
         run: uv python install 3.12
       - name: Install
-        run: uv sync --extra dev
+        run: uv sync --extra dev --extra warehouse
       - name: Lint
         run: uv run ruff check src tests
       - name: Format check
         run: uv run ruff format --check src tests
       - name: Test
         run: uv run pytest --cov=mentalscape --cov-report=term-missing
+
+  warehouse-postgres:
+    name: Warehouse on PostgreSQL
+    # Builds and tests every dbt model on PostgreSQL using the synthetic fixture,
+    # so the PostgreSQL version of the warehouse is proven on every change (ADR 0010).
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: mentalscape
+          POSTGRES_PASSWORD: ci
+          POSTGRES_DB: mentalscape
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U mentalscape"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      PGHOST: localhost
+      PGPORT: "5432"
+      PGUSER: mentalscape
+      PGPASSWORD: ci
+      PGDATABASE: mentalscape
+      DATABASE_URL: postgresql://mentalscape:ci@localhost:5432/mentalscape
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+      - name: Install
+        run: |
+          uv python install 3.12
+          uv sync --extra warehouse
+      - name: Build the fixture and load it into PostgreSQL
+        run: |
+          uv run python -m mentalscape.warehouse.fixture --out data/interim/fixture
+          uv run python -m mentalscape.warehouse.load --target postgres \
+            --manifest data/interim/fixture/manifest.csv --assets data/interim/fixture/assets
+      - name: Build and test every model
+        run: |
+          uv run dbt build --project-dir warehouse --profiles-dir warehouse --target ci \
+            --vars '{min_sub_icbs_per_release: 2}'

@@ -1,0 +1,69 @@
+version: 2
+
+models:
+  - name: fct_mhsds_values
+    description: Analysis ready MHSDS values from the preferred file of each month
+    data_tests:
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - release_month
+              - period_start
+              - period_end
+              - breakdown
+              - primary_code
+              - secondary_code
+              - measure_id
+    columns:
+      - name: measure_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_mhsds_measure')
+                field: measure_id
+
+  - name: dim_mhsds_measure
+    description: One row per measure ID with its lifetime, reporting windows and caveats
+    columns:
+      - name: measure_id
+        data_tests: [unique, not_null]
+
+  - name: dim_mhsds_release
+    description: One row per release month with the file used and how many values it gave
+    columns:
+      - name: release_month
+        data_tests: [unique, not_null]
+      - name: version_used
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["final", "performance"]
+
+  - name: geo_sub_icb_membership
+    description: Dated membership of each Sub ICB in an ICB
+    data_tests:
+      - unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [sub_icb_code, valid_from_month]
+    columns:
+      - name: icb_code
+        description: Null would mean the Sub ICB name did not match any ICB published that month
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+
+  - name: dim_sub_icb
+    columns:
+      - name: sub_icb_code
+        data_tests: [unique, not_null]
+      - name: status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["current", "retired"]
+
+  - name: dim_icb
+    columns:
+      - name: icb_code
+        data_tests: [unique, not_null]

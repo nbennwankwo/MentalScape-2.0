@@ -8,6 +8,10 @@ data/**/*.zip
 !data/README.md
 
 # Large or binary outputs
+data/warehouse/
+warehouse/target/
+warehouse/logs/
+warehouse/dbt_packages/
 *.parquet
 *.duckdb
 *.duckdb.wal

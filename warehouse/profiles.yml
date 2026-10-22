@@ -1,0 +1,19 @@
+# Connection settings. Run dbt from the repository root with
+#   uv run dbt build --project-dir warehouse --profiles-dir warehouse --target local
+mentalscape:
+  target: local
+  outputs:
+    local:
+      type: duckdb
+      path: "{{ env_var('MENTALSCAPE_DUCKDB', 'data/warehouse/mentalscape.duckdb') }}"
+      schema: main
+      threads: 4
+    ci:
+      type: postgres
+      host: "{{ env_var('PGHOST', 'localhost') }}"
+      port: "{{ env_var('PGPORT', '5432') | int }}"
+      user: "{{ env_var('PGUSER', 'mentalscape') }}"
+      password: "{{ env_var('PGPASSWORD', '') }}"
+      dbname: "{{ env_var('PGDATABASE', 'mentalscape') }}"
+      schema: public
+      threads: 4
