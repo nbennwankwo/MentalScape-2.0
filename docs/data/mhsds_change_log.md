@@ -75,6 +75,8 @@ Mixing versions creates false changes. An early run of this analysis used the Pe
 
 **A national breakdown with no geography in its label.** In 2022-23 the national split by ethnicity is labelled "Ethnicity (White British/Non-White British)", with no mention of England. It is mapped to England explicitly.
 
+**Local authorities that stop appearing.** Barnsley and Sheffield have had no local authority values since the middle of 2025, although both councils still exist. The warehouse marks them as not in the latest release rather than abolished.
+
 **Providers.** The number of providers reporting grew from 408 to 518, with a steady churn of providers joining and leaving.
 
 ### 5. File format

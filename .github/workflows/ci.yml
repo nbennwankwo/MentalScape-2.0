@@ -66,8 +66,7 @@ jobs:
       - name: Build the fixture and load it into PostgreSQL
         run: |
           uv run python -m mentalscape.warehouse.fixture --out data/interim/fixture
-          uv run python -m mentalscape.warehouse.load --target postgres \
-            --manifest data/interim/fixture/manifest.csv --assets data/interim/fixture/assets
+          uv run python -m mentalscape.warehouse.load --source all --target postgres --raw-dir data/interim/fixture
       - name: Build and test every model
         run: |
           uv run dbt build --project-dir warehouse --profiles-dir warehouse --target ci \

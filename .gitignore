@@ -49,3 +49,4 @@ htmlcov/
 .vscode/
 .idea/
 .kiro/
+build_summary.md

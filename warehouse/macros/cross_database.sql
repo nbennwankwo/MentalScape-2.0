@@ -77,9 +77,11 @@
     end
 {%- endmacro %}
 
-{#- Codes such as UNKNOWN are catch alls, not real places. -#}
+{#- Codes such as UNKNOWN are catch alls, not real places. NHS Talking
+    Therapies also uses ALL for totals and InvalidRegionCode for unknown regions. -#}
 {% macro is_real_code(column) -%}
-    upper(coalesce({{ column }}, '')) not in ('UNKNOWN', 'INVALID', 'MISSING', 'NONE', '')
+    (upper(coalesce({{ column }}, '')) not in ('UNKNOWN', 'INVALID', 'MISSING', 'NONE', 'ALL', '')
+        and upper(coalesce({{ column }}, '')) not like 'INVALID%')
 {%- endmacro %}
 
 {#- Number of months a reporting window covers, counting both ends. -#}
@@ -88,4 +90,16 @@
         (extract(year from {{ end_column }}) - extract(year from {{ start_column }})) * 12
         + extract(month from {{ end_column }}) - extract(month from {{ start_column }}) + 1
     as integer)
+{%- endmacro %}
+
+{#- The 182 single year of age columns in the ONS LSOA population workbook,
+    f0 to f90 and m0 to m90, where 90 means 90 and over. -#}
+{% macro population_age_columns() -%}
+    {%- set columns = [] -%}
+    {%- for sex in ['f', 'm'] -%}
+        {%- for age in range(91) -%}
+            {%- do columns.append(sex ~ age) -%}
+        {%- endfor -%}
+    {%- endfor -%}
+    {{ return(columns) }}
 {%- endmacro %}

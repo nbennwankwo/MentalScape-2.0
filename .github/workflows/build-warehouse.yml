@@ -1,0 +1,76 @@
+name: Build warehouse
+
+# Rebuilds the whole warehouse from the data releases and runs every data test
+# on all real months, then publishes the DuckDB file (docs/adr/0013).
+#   workflow_run       after any ingest workflow finishes on main
+#   schedule           every Saturday
+#   workflow_dispatch  run by hand
+
+on:
+  workflow_run:
+    workflows: ["Ingest MHSDS", "Ingest NHS Talking Therapies", "Ingest reference files"]
+    types: [completed]
+    branches: [main]
+  schedule:
+    - cron: "41 5 * * 6"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-warehouse
+  cancel-in-progress: true
+
+env:
+  RELEASE_TAG: warehouse-latest
+  MENTALSCAPE_DUCKDB: data/warehouse/mentalscape.duckdb
+
+jobs:
+  build:
+    # After an ingest run, build only if that run succeeded.
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+
+      - name: Install
+        run: |
+          uv python install 3.12
+          uv sync --extra warehouse
+
+      - name: Fetch every source from the data releases
+        run: uv run python -m mentalscape.warehouse.fetch --source all
+
+      - name: Load the raw schema
+        run: uv run python -m mentalscape.warehouse.load --source all --target duckdb
+
+      - name: Build and test every model
+        run: |
+          set -o pipefail
+          uv run dbt build --project-dir warehouse --profiles-dir warehouse --target local | tee dbt_build.log
+
+      - name: Write the build summary
+        if: always()
+        run: |
+          uv run python -m mentalscape.warehouse.summary \
+            --duckdb-path "$MENTALSCAPE_DUCKDB" --run-results warehouse/target/run_results.json \
+            --out build_summary.md || echo "No summary, the build stopped early"
+          if [ -f build_summary.md ]; then cat build_summary.md >> "$GITHUB_STEP_SUMMARY"; fi
+
+      - name: Publish the warehouse
+        run: |
+          zstd -T0 -10 -q "$MENTALSCAPE_DUCKDB" -o mentalscape.duckdb.zst
+          cp warehouse/target/run_results.json run_results.json
+          if ! gh release view "$RELEASE_TAG" > /dev/null 2>&1; then
+            gh release create "$RELEASE_TAG" --title "Latest warehouse build" \
+              --notes-file .github/release-notes/warehouse-latest.md --latest=false
+          fi
+          gh release upload "$RELEASE_TAG" mentalscape.duckdb.zst build_summary.md run_results.json --clobber

@@ -40,7 +40,7 @@ concurrency:
 env:
   # Months a pull request trial collects. Set to all for a one off full trial
   # before a change that depends on every file, then set it back.
-  TRIAL_MONTHS: all
+  TRIAL_MONTHS: "2022-07,2023-01,2026-08"
   RELEASE_TAG: data-talking-therapies-monthly
   STAGING_TAG: data-staging
   OUT_DIR: data/interim/ingest
